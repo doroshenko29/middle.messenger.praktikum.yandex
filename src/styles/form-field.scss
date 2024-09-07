@@ -1,0 +1,18 @@
+.form-field {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    label {
+        font-family: 'Inter';
+        font-size: 1em;
+        color: #999999;
+    }
+    input {
+        padding: 8px 0;
+        border-bottom: 1px solid #3369F3;
+        background-color: transparent;
+        color: #1E1E1E;
+        font-family: "Inter";
+        font-size: 1em; 
+    }
+}
