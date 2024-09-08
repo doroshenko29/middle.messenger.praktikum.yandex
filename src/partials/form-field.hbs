@@ -1,7 +1,8 @@
 <div class="form-field">
     <label for={{name}}>{{label}}</label>
-    <input type={{type}} name={{name}} required>
+    {{#if value}}
+    <input type={{type}} name={{name}} value={{value}}>
+    {{else}}
+    <input type={{type}} name={{name}}>
+    {{/if}}
 </div>
-
-
-<link rel='stylesheet' href='{{resolve-from-root "styles/form-field.scss"}}'/>
