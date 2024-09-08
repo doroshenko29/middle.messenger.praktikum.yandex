@@ -1,13 +1,16 @@
 import { resolve } from 'path';
+import { defineConfig } from 'vite';
 import handlebars from 'vite-plugin-handlebars';
 
-export default {
-  root: resolve(__dirname, 'src'),
+export default defineConfig({
+  root: 'src/pages',
+  server: {
+    port: '3000'
+  },
   plugins: [
     handlebars({
         partialDirectory: resolve(__dirname, 'src/partials'),
         context: {
-            titleTest: 'Hello, world!',
             error404: {
                 errorCode: "404",
                 errorText: "Не туда попали",
@@ -134,4 +137,4 @@ export default {
         },
     }),
   ],
-};
+});

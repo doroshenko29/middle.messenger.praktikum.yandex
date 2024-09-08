@@ -10,9 +10,10 @@
   <body>
     {{> back-link}}
     <div class="profile">
-      <button class="profile__avatar">
+      <div class="profile__avatar">
         <span>Поменять аватар</span>
-      </button>
+        <input type="file" name="avatar">
+      </div>
       <h4>Иван</h4>
       <section>
         {{#each profile.fields }}

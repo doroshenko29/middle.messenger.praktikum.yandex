@@ -14,6 +14,16 @@
         border-radius: 50%;
         position: relative;
         background: #EFEFEF url('/assets/image_placeholder.svg') no-repeat center center;
+        input {
+            opacity: 0;
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            width: inherit;
+            height: inherit;
+            display: block;
+            border-radius: inherit;
+        }
         span {
             display: none;
             width: min-content;
@@ -46,9 +56,6 @@
         &+section {
             margin-top: 104px;
         }
-    }
-    &__username {
-        height: 100px;
     }
     section {
         width: 100%;
