@@ -1,0 +1,19 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>middle.messenger.praktikum.yandex</title>
+    <link rel='stylesheet' href='/style.css' />
+  </head>
+  <body>
+    {{#> auth-form title=registration.title }}
+      {{#each registration.fields }}
+       {{> form-field label=label type=type name=name }}
+      {{/each}}
+      {{> button text="Зарегистрироваться"}}
+      <a href="/login">Войти</a>
+    {{/auth-form }}
+  </body>
+</html>
