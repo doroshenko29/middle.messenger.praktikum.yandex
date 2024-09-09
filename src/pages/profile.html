@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Настройки пользователя</title>
+    <link rel='stylesheet' href='styles/main.scss' />
+    <link rel='stylesheet' href='styles/profile-page.scss' />
+  </head>
+  <body>
+    {{> back-link}}
+    <div class="profile">
+      <div class="profile__avatar">
+        <span>Поменять аватар</span>
+        <input type="file" name="avatar">
+      </div>
+      <h4>Иван</h4>
+      <section>
+        {{#each profile.fields }}
+          {{> form-field this }}
+        {{/each}}
+      </section>
+      <section>
+        <div class="form-field"><a href="/profile-change">Изменить данные</a></div>
+        <div class="form-field"><a href="/profile-password-change">Изменить пароль</a></div>
+        <div class="form-field"><a class="exit__link" href="/">Выйти</a></div>
+      </section>
+    </div>
+  </body>
+</html>
