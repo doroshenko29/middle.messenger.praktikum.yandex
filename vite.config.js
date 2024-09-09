@@ -3,7 +3,10 @@ import { defineConfig } from 'vite';
 import handlebars from 'vite-plugin-handlebars';
 
 export default defineConfig({
-  root: 'src/pages',
+    root: resolve(__dirname, 'src/pages'),
+  build: {
+    outDir: '../../dist',
+   },
   server: {
     port: '3000'
   },
