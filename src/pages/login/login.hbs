@@ -1,0 +1,10 @@
+<main class="page">
+  {{#> AuthForm title=title }}
+    {{#each fields }}
+      {{> FormField this}}
+    {{/each}}
+    {{> Button text="Авторизоваться"}}
+    <a href="/registration">Нет аккаунта?</a>
+  {{/AuthForm }}
+</main>
+{{> DevModeNav}}
