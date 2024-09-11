@@ -7,12 +7,14 @@ import BackLink from './partials/back-link.hbs?raw';
 import AuthForm from './partials/auth-form.hbs?raw';
 import FormField from './partials/form-field.hbs?raw';
 import DevModeNav from './partials/dev-mode-nav.hbs?raw';
+import AvatarChange from './partials/avatar-change.hbs?raw';
 
 Handlebars.registerPartial('Button', Button);
 Handlebars.registerPartial('BackLink', BackLink);
 Handlebars.registerPartial('AuthForm', AuthForm);
 Handlebars.registerPartial('FormField', FormField);
 Handlebars.registerPartial('DevModeNav', DevModeNav);
+Handlebars.registerPartial('AvatarChange', AvatarChange);
 
 export default class App {
     constructor() {

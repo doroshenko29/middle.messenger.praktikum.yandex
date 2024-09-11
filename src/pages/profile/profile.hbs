@@ -1,10 +1,7 @@
 <div class="page">
   {{> BackLink}}
   <main class="profile">
-    <div class="profile__avatar">
-      <span>Поменять аватар</span>
-      <input type="file" name="avatar">
-    </div>
+    {{> AvatarChange}}
     <h4>Иван</h4>
     <section>
       {{#each fields }}
