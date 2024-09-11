@@ -1,0 +1,13 @@
+<div class="page">
+  {{> BackLink}}
+  <main class="profile">
+    {{> AvatarChange}}
+    <section>
+      {{#each fields }}
+        {{> FormField this }}
+      {{/each}}
+    </section>
+    {{> Button text="Сохранить"}}
+  </main>
+</div>
+{{> DevModeNav}}

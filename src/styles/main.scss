@@ -32,6 +32,22 @@ body {
   height: 100vh;
 }
 
+#app {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  height: 100%;
+  .page {
+    display: flex;
+    flex: 1;
+  }
+}
+
+* {
+  box-sizing: border-box;
+}
+
 h1, h2, h3, h4 {
   margin-top: 0;
 }
@@ -50,16 +66,25 @@ h4 {
 }
 
 button {
-  font-size: 14px;
-  font-weight: 500;
-  font-family: inherit;
-  background-color: #1a1a1a;
   cursor: pointer;
-  transition: border-color 0.25s;
   border: none;
   padding: 0;
   margin: 0;
 }
+
+button[type="submit"] {
+  font-size: 14px;
+  font-weight: 500;
+  height: 38px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 8px;
+  background-color: #3369F3;
+  color: #fff;
+}
+
 button:hover {
   border-color: #646cff;
 }
@@ -71,15 +96,174 @@ input {
   border: none;
   outline: none;
 }
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
+
+.auth-form {
+  display: flex;
+  flex-direction: column;
+  margin: auto;
+  align-items: center;
+  box-shadow: 0 0 6px 0 rgba(0, 0, 0, 0.14);
+  border-radius: 12px;
+  padding: 50px 30px 30px;
+  width: 340px;
+  min-height: 450px;
+  background-color: #FFF;
+  button ~ a {
+      margin-top: 14px;
   }
-  a:hover {
-    color: #747bff;
+  .form-field {
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+      label {
+          font-family: 'Inter';
+          font-size: 14px;
+          color: #999999;
+      }
+      input {
+          padding: 8px 0;
+          border-bottom: 1px solid #3369F3;
+          background-color: transparent;
+          color: #1E1E1E;
+          font-family: "Inter";
+          font-size: 14px; 
+      }
+      &:last-child {
+          margin-bottom: 40px;
+      }
+      &~button {
+          margin-top: auto;
+      }
+      ~ .form-field {
+          margin-top: 16px;
+      }
   }
-  button {
-    background-color: #f9f9f9;
+}
+
+.profile {
+  display: flex;
+  flex-direction: column;
+  margin: 15% auto;
+  align-items: center;
+  align-self: baseline;
+  width: 560px;
+  .avatar-change {
+      &+h4 {
+          margin-top: 20px;
+          margin-bottom: 60px;
+      }
+      &+section {
+          margin-top: 104px;
+      }
+  }
+  section {
+      width: 100%;
+      &~section, ~button {
+          margin-top: 50px;
+      }
+  }
+  .form-field {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
+      height: 36px;
+      label {
+          font-family: 'Inter';
+          font-weight: 500;
+          font-size: 14px;
+          color: #1E1E1E;
+          flex-shrink: 0;
+          margin-right: 20px;
+      }
+      input {
+          color: #999999;
+          font-family: "Inter";
+          font-weight: 500;
+          font-size: 14px; 
+          text-align: end;
+          flex-grow: 1;
+      }
+      &:not(:last-child) {
+          border-bottom: 1px solid #EAEAEA;
+      }
+      a.exit__link {
+          color: red;
+      }
+  }
+}
+
+.back-link {
+  min-height: inherit;
+  width: 64px;
+  background-color: #FBFBFB;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  &__arrow {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: #3369F3 url('/arrow_left.svg') no-repeat center center;
+  }
+}
+
+.error-form {
+  display: flex;
+  flex-direction: column;
+  margin: auto;
+  align-items: center;
+}
+
+.dev-mode-nav {
+  ul {
+    display: flex;
+    li {
+      display: flex;
+      flex: 1;
+    }
+  }
+}
+
+.avatar-change {
+  width: 130px;
+  height: 130px;
+  border-radius: 50%;
+  position: relative;
+  background: #EFEFEF url('/image_placeholder.svg') no-repeat center center;
+  input {
+      opacity: 0;
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      width: inherit;
+      height: inherit;
+      display: block;
+      border-radius: inherit;
+  }
+  span {
+      display: none;
+      width: min-content;
+      font-family: 'Inter';
+      font-size: 12px;
+      color: #fff;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+  }
+  &:hover{
+      &::before {
+          content: '';
+          background-color: #000000;
+          opacity: 0.5;
+          width: inherit;
+          height: inherit;
+          display: block;
+          border-radius: inherit;
+      }
+      span {
+          display: flex;
+      }
   }
 }
