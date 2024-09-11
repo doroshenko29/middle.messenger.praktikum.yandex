@@ -1,10 +1,19 @@
 :root {
+  --background-color: #eaeaea;
+  --link-background-color: #3369F3;
+  --primary-text-color: #fff;
+  --secondary-text-color: #242424;
+  --link-text-color: #535bf2;
+  --link-hover-color: #646cff;
+  --error-color: #f82d17;
+  --form-primary-text-color: #999999;
+  --form-secondary-text-color: #242424;
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
 
   color-scheme: light dark;
-  color: #242424;
+  color: var(--secondary-text-color);
   background-color: rgba(255, 255, 255, 0.87);
 
   font-synthesis: none;
@@ -16,11 +25,11 @@
 a {
   font-size: 14px;
   font-weight: 500;
-  color: #646cff;
+  color: var(--link-text-color);
   text-decoration: inherit;
 }
 a:hover {
-  color: #535bf2;
+  color: var(--link-hover-color);
 }
 
 body {
@@ -81,12 +90,12 @@ button[type="submit"] {
   justify-content: center;
   align-items: center;
   border-radius: 8px;
-  background-color: #3369F3;
-  color: #fff;
+  background-color: var(--link-background-color);
+  color: var(--primary-text-color);
 }
 
 button:hover {
-  border-color: #646cff;
+  border-color: var(--link-hover-color);
 }
 button:focus,
 button:focus-visible {
@@ -107,7 +116,7 @@ input {
   padding: 50px 30px 30px;
   width: 340px;
   min-height: 450px;
-  background-color: #FFF;
+  background-color: var(--primary-text-color);
   button ~ a {
       margin-top: 14px;
   }
@@ -118,13 +127,13 @@ input {
       label {
           font-family: 'Inter';
           font-size: 14px;
-          color: #999999;
+          color: var(--form-primary-text-color);
       }
       input {
           padding: 8px 0;
-          border-bottom: 1px solid #3369F3;
+          border-bottom: 1px solid var(--link-background-color);
           background-color: transparent;
-          color: #1E1E1E;
+          color: var(--form-secondary-text-color);
           font-family: "Inter";
           font-size: 14px; 
       }
@@ -141,12 +150,14 @@ input {
 }
 
 .profile {
-  display: flex;
-  flex-direction: column;
   margin: 15% auto;
-  align-items: center;
-  align-self: baseline;
-  width: 560px;
+  &__form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    align-self: baseline;
+    width: 560px;
+  }
   .avatar-change {
       &+h4 {
           margin-top: 20px;
@@ -172,12 +183,12 @@ input {
           font-family: 'Inter';
           font-weight: 500;
           font-size: 14px;
-          color: #1E1E1E;
+          color: var(--form-secondary-text-color);
           flex-shrink: 0;
           margin-right: 20px;
       }
       input {
-          color: #999999;
+          color: var(--form-primary-text-color);
           font-family: "Inter";
           font-weight: 500;
           font-size: 14px; 
@@ -185,10 +196,10 @@ input {
           flex-grow: 1;
       }
       &:not(:last-child) {
-          border-bottom: 1px solid #EAEAEA;
+          border-bottom: 1px solid var(--background-color);
       }
       a.exit__link {
-          color: red;
+          color: var(--error-color);
       }
   }
 }
@@ -196,7 +207,7 @@ input {
 .back-link {
   min-height: inherit;
   width: 64px;
-  background-color: #FBFBFB;
+  background-color: var(--background-color);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -204,7 +215,7 @@ input {
       width: 28px;
       height: 28px;
       border-radius: 50%;
-      background: #3369F3 url('/arrow_left.svg') no-repeat center center;
+      background: var(--link-background-color) url('/arrow_left.svg') no-repeat center center;
   }
 }
 
@@ -230,7 +241,7 @@ input {
   height: 130px;
   border-radius: 50%;
   position: relative;
-  background: #EFEFEF url('/image_placeholder.svg') no-repeat center center;
+  background: var(--background-color) url('/image_placeholder.svg') no-repeat center center;
   input {
       opacity: 0;
       position: absolute;
