@@ -42,45 +42,51 @@ Expecting `+x.join(", ")+", got '"+(this.terminals_[k]||k)+"'":F="Parse error on
 `,xn=`<div class="page">\r
   {{> BackLink}}\r
   <main class="profile">\r
-    {{> AvatarChange}}\r
-    <h4>Иван</h4>\r
-    <section>\r
-      {{#each fields }}\r
-        {{> FormField this }}\r
-      {{/each}}\r
-    </section>\r
-    <section>\r
-      <div class="form-field"><a href="#" data-page="profile-change">Изменить данные</a></div>\r
-      <div class="form-field"><a href="#" data-page="profile-password-change">Изменить пароль</a></div>\r
-      <div class="form-field"><a class="exit__link" href="#" data-page="login">Выйти</a></div>\r
-    </section>\r
+    <form class="profile__form">\r
+      {{> AvatarChange}}\r
+      <h4>Иван</h4>\r
+      <section>\r
+        {{#each fields }}\r
+          {{> FormField this }}\r
+        {{/each}}\r
+      </section>\r
+      <section>\r
+        <div class="form-field"><a href="#" data-page="profile-change">Изменить данные</a></div>\r
+        <div class="form-field"><a href="#" data-page="profile-password-change">Изменить пароль</a></div>\r
+        <div class="form-field"><a class="exit__link" href="#" data-page="login">Выйти</a></div>\r
+      </section>\r
+    </form>\r
   </main>\r
 </div>\r
 {{> DevModeNav}}\r
 `,Mn=`<div class="page">\r
   {{> BackLink}}\r
   <main class="profile">\r
-    {{> AvatarChange}}\r
-    <section>\r
-      {{#each fields }}\r
-        {{> FormField this }}\r
-      {{/each}}\r
-    </section>\r
-    {{> Button text="Сохранить"}}\r
+    <form class="profile__form">\r
+      {{> AvatarChange}}\r
+      <section>\r
+        {{#each fields }}\r
+          {{> FormField this }}\r
+        {{/each}}\r
+      </section>\r
+      {{> Button text="Сохранить"}}\r
+    </form>\r
   </main>\r
 </div>\r
 {{> DevModeNav}}\r
 `,An=`<div class="page">\r
   {{> BackLink}}\r
   <main class="profile">\r
-    {{> AvatarChange}}\r
-    <h4>Иван</h4>\r
-    <section>\r
-      {{#each fields }}\r
-        {{> FormField this }}\r
-      {{/each}}\r
-    </section>\r
-    {{> Button text="Сохранить"}}\r
+    <form class="profile__form">\r
+      {{> AvatarChange}}\r
+      <h4>Иван</h4>\r
+      <section>\r
+        {{#each fields }}\r
+          {{> FormField this }}\r
+        {{/each}}\r
+      </section>\r
+      {{> Button text="Сохранить"}}\r
+    </form>\r
   </main>\r
 </div>\r
 {{> DevModeNav}}\r
