@@ -52,7 +52,7 @@ export default class App {
             }
             case 'profile-password-change': {
                 template = Handlebars.compile(Pages.ProfilePasswordChangePage);
-                this.appElement.innerHTML = template(mockProfileData);
+                this.appElement.innerHTML = template({fields: mockProfileData.password_fields});
                 break;
             }
             case 'error-404': {
