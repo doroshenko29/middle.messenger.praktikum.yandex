@@ -1,4 +1,4 @@
-# [middle.messenger.praktikum.yandex]
+# [middle.messenger.praktikum.yandex] ![Прохождение тестов](https://github.com/doroshenko29/middle.messenger.praktikum.yandex/actions/workflows/tests.yml/badge.svg?branch=sprint_2)
 
 Чат для общения. Приятный интерфейс, удобный функционал, ничего лишнего.
 
