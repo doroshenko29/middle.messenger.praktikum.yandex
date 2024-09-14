@@ -22,13 +22,13 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
-a {
+.link {
   font-size: 14px;
   font-weight: 500;
   color: var(--link-text-color);
   text-decoration: inherit;
 }
-a:hover {
+.link:hover {
   color: var(--link-hover-color);
 }
 
@@ -74,14 +74,14 @@ h4 {
   margin-bottom: 20px;
 }
 
-button {
+.button {
   cursor: pointer;
   border: none;
   padding: 0;
   margin: 0;
 }
 
-button[type="submit"] {
+.button[type="submit"] {
   font-size: 14px;
   font-weight: 500;
   height: 38px;
@@ -94,11 +94,11 @@ button[type="submit"] {
   color: var(--primary-text-color);
 }
 
-button:hover {
+.button:hover {
   border-color: var(--link-hover-color);
 }
-button:focus,
-button:focus-visible {
+.button:focus,
+.button:focus-visible {
   outline: none;
 }
 input {
@@ -117,19 +117,19 @@ input {
   width: 340px;
   min-height: 450px;
   background-color: var(--primary-text-color);
-  button ~ a {
+  .button ~ .link {
       margin-top: 14px;
   }
   .form-field {
       display: flex;
       flex-direction: column;
       width: 100%;
-      label {
+      &__label {
           font-family: 'Inter';
           font-size: 14px;
           color: var(--form-primary-text-color);
       }
-      input {
+      &__input {
           padding: 8px 0;
           border-bottom: 1px solid var(--link-background-color);
           background-color: transparent;
@@ -140,7 +140,7 @@ input {
       &:last-child {
           margin-bottom: 40px;
       }
-      &~button {
+      &~.button {
           margin-top: auto;
       }
       ~ .form-field {
@@ -169,7 +169,7 @@ input {
   }
   section {
       width: 100%;
-      &~section, ~button {
+      &~section, ~.button {
           margin-top: 50px;
       }
   }
@@ -179,7 +179,7 @@ input {
       align-items: center;
       width: 100%;
       height: 36px;
-      label {
+      &__label {
           font-family: 'Inter';
           font-weight: 500;
           font-size: 14px;
@@ -187,7 +187,7 @@ input {
           flex-shrink: 0;
           margin-right: 20px;
       }
-      input {
+      &__input {
           color: var(--form-primary-text-color);
           font-family: "Inter";
           font-weight: 500;
@@ -198,7 +198,7 @@ input {
       &:not(:last-child) {
           border-bottom: 1px solid var(--background-color);
       }
-      a.exit__link {
+      .link.exit__link {
           color: var(--error-color);
       }
   }
@@ -252,7 +252,7 @@ input {
       display: block;
       border-radius: inherit;
   }
-  span {
+  &__placeholder {
       display: none;
       width: min-content;
       font-family: 'Inter';
@@ -273,7 +273,7 @@ input {
           display: block;
           border-radius: inherit;
       }
-      span {
+      .avatar-change__placeholder {
           display: flex;
       }
   }

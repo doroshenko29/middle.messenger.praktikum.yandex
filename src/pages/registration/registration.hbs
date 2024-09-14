@@ -4,7 +4,7 @@
       {{> FormField label=label type=type name=name }}
     {{/each}}
     {{> Button text="Зарегистрироваться"}}
-    <a href="#" data-page="login">Войти</a>
+    {{> Link dataPage="login" text="Войти"}}
   {{/AuthForm }}
 </main>
 {{> DevModeNav}}

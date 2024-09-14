@@ -10,9 +10,9 @@
         {{/each}}
       </section>
       <section>
-        <div class="form-field"><a href="#" data-page="profile-change">Изменить данные</a></div>
-        <div class="form-field"><a href="#" data-page="profile-password-change">Изменить пароль</a></div>
-        <div class="form-field"><a class="exit__link" href="#" data-page="login">Выйти</a></div>
+        <div class="form-field">{{> Link dataPage="profile-change" text="Изменить данные"}}</div>
+        <div class="form-field">{{> Link dataPage="profile-password-change" text="Изменить пароль"}}</div>
+        <div class="form-field">{{> Link dataPage="login" text="Выйти" extraClass=" exit__link"}}</div>
       </section>
     </form>
   </main>

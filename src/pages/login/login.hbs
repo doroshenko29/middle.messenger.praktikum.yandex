@@ -4,7 +4,7 @@
       {{> FormField this}}
     {{/each}}
     {{> Button text="Авторизоваться"}}
-    <a href="#" data-page="registration">Нет аккаунта?</a>
+    {{> Link dataPage="registration" text="Нет аккаунта?"}}
   {{/AuthForm }}
 </main>
 {{> DevModeNav}}
