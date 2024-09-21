@@ -2,19 +2,13 @@
   {{> BackLink}}
   <main class="profile">
     <form class="profile__form">
-      {{> AvatarChange}}
-      <h4>Иван</h4>
-      <section>
-        {{#each fields }}
-          {{> FormField this }}
-        {{/each}}
-      </section>
-      <section>
-        <div class="form-field">{{> Link dataPage="profile-change" text="Изменить данные"}}</div>
-        <div class="form-field">{{> Link dataPage="profile-password-change" text="Изменить пароль"}}</div>
-        <div class="form-field">{{> Link dataPage="login" text="Выйти" extraClass=" exit__link"}}</div>
-      </section>
+      {{{avatar}}}
+      <h4>{{name}}</h4>
+      {{{fields}}}
     </form>
+    <section>
+      {{{formLinks}}}
+    </section>
   </main>
 </div>
 {{> DevModeNav}}

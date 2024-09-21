@@ -1,4 +1,9 @@
-class Block {
+import Handlebars from "handlebars";
+import EventBus from "../utils/event-bus";
+import NeedArray from '../utils/NeedArray';
+import {v4 as makeUUID} from 'uuid';
+
+export default class Block {
     static EVENTS = {
       INIT: "init",
       FLOW_CDM: "flow:component-did-mount",
@@ -8,6 +13,7 @@ class Block {
   
   _element = null;
   _meta = null;
+  _id = null;
   
   /** JSDoc
      * @param {string} tagName
@@ -15,14 +21,23 @@ class Block {
      *
      * @returns {void}
      */
-  constructor(tagName = "div", props = {}) {
+
+
+  // @todo add classNames
+  constructor(tagName = "div", propsAndChildren = {}) {
+    const { children, props } = this._getChildren(propsAndChildren);
+    this.children = children;
+
     const eventBus = new EventBus();
+    
     this._meta = {
       tagName,
       props
     };
+
+    this._id = makeUUID();
   
-    this.props = this._makePropsProxy(props);
+    this.props = this._makePropsProxy({...props, __id: this._id});
   
     this.eventBus = () => eventBus;
   
@@ -30,6 +45,36 @@ class Block {
     eventBus.emit(Block.EVENTS.INIT);
   }
   
+  _addEvents(){
+    const {events = {}} = this.props;
+    Object.keys(events).forEach(eventName => {
+      this._element.addEventListener(eventName, events[eventName]);
+    })
+  }
+
+  _removeEvents(){
+    const {events = {}} = this.props;
+    Object.keys(events).forEach(eventName => {
+      this._element.removeEventListener(eventName, events[eventName]);
+    })
+  }
+
+  _getChildren(propsAndChildren) {
+    const children = {}
+    const props = {}
+
+    // @todo for of
+    Object.entries(propsAndChildren).forEach(([key, value]) => {
+      if(value instanceof Block) {
+        children[key] = value;
+      } else {
+        props[key] = value;
+      }
+    })
+
+    return { children, props };
+  }
+
   _registerEvents(eventBus) {
     eventBus.on(Block.EVENTS.INIT, this.init.bind(this));
     eventBus.on(Block.EVENTS.FLOW_CDM, this._componentDidMount.bind(this));
@@ -49,13 +94,19 @@ class Block {
   
   _componentDidMount() {
     this.componentDidMount();
+
+    Object.values(this.children).forEach(child => {
+      for(const _child of NeedArray(child)) {
+        _child.dispatchComponentDidMount();
+      }
+    })
   }
   
   // Может переопределять пользователь, необязательно трогать
   componentDidMount(oldProps) {}
   
-  dispatchComponentDidMoun() {
-    this._eventBus().emit(Block.EVENTS.FLOW_CDM);
+  dispatchComponentDidMount() {
+    this.eventBus().emit(Block.EVENTS.FLOW_CDM);
   }
   
   _componentDidUpdate(oldProps, newProps) {
@@ -85,11 +136,13 @@ class Block {
   
   _render() {
     const block = this.render();
-    // Этот небезопасный метод для упрощения логики
-    // Используйте шаблонизатор из npm или напишите свой безопасный
-    // Нужно не в строку компилировать (или делать это правильно),
-    // либо сразу в DOM-элементы возвращать из compile DOM-ноду
-    this._element.innerHTML = block;
+    
+    this._removeEvents();
+
+    this._element.innerHTML = '';
+    this._element.appendChild(block);
+
+    this._addEvents();
   }
   
   // Может переопределять пользователь, необязательно трогать
@@ -122,8 +175,9 @@ class Block {
   }
   
   _createDocumentElement(tagName) {
-    // Можно сделать метод, который через фрагменты в цикле создаёт сразу несколько блоков
-    return document.createElement(tagName);
+    const element = document.createElement(tagName)
+    element.setAttribute('data-id', this._id)
+    return element;
   }
   
   show() {
@@ -133,4 +187,30 @@ class Block {
   hide() {
     this.getContent().style.display = "none";
   }
+
+  compile(_template, props) {
+    const propsAndStubs = { ...props };
+    
+    Object.entries(this.children).forEach(([key, child]) => {
+      propsAndStubs[key] = NeedArray(child).reduce((acc, current) => {
+        return acc += `<div data-id="${current._id}"></div>`;
+      }, '')
+    })
+
+    const fragment = this._createDocumentElement('template');
+
+    const template = Handlebars.compile(_template);
+        
+    fragment.innerHTML = template({...propsAndStubs});
+
+    Object.values(this.children).forEach(child => {
+      NeedArray(child).forEach(_child => {
+        const stub = fragment.content.querySelector(`[data-id="${_child._id}"]`)
+    
+        stub.replaceWith(_child.getContent());
+      })
+    })
+
+    return fragment.content;
   }
+}

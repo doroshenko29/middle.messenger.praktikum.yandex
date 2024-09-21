@@ -2,13 +2,11 @@
   {{> BackLink}}
   <main class="profile">
     <form class="profile__form">
-      {{> AvatarChange}}
+      {{{avatar}}}
       <section>
-        {{#each fields }}
-          {{> FormField this }}
-        {{/each}}
+        {{{fields}}}
       </section>
-      {{> Button text="Сохранить"}}
+      {{{button}}}
     </form>
   </main>
 </div>

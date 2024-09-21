@@ -1,6 +1,6 @@
 export const mockLoginData = {
   title: "Вход",
-  fields: [
+  fieldsDto: [
     {
       label: "Логин",
       name: "login",
@@ -16,7 +16,7 @@ export const mockLoginData = {
 
 export const mockRegistrationData = {
   title: "Регистрация",
-  fields: [
+  fieldsDto: [
     {
       label: "Почта",
       name: "email",
@@ -56,7 +56,8 @@ export const mockRegistrationData = {
 };
 
 export const mockProfileData = {
-  fields: [
+  name: 'Иван',
+  fieldsDto: [
     {
       label: "Почта",
       name: "email",
