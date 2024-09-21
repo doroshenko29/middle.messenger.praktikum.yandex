@@ -1,8 +1,11 @@
-<div class="form-field">
-    <label for={{name}} class="form-field__label">{{label}}</label>
-    {{#if value}}
-    <input type={{type}} name={{name}} value={{value}} class="form-field__input">
-    {{else}}
-    <input type={{type}} name={{name}} class="form-field__input">
-    {{/if}}
-</div>
+<label for={{name}} class='form-field__label'>{{label}}</label>
+{{#if value}}
+	<input
+		type={{type}}
+		name={{name}}
+		value={{value}}
+		class='form-field__input'
+	/>
+{{else}}
+	<input type={{type}} name={{name}} class='form-field__input' />
+{{/if}}

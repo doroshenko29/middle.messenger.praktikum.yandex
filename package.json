@@ -1,43 +1,43 @@
 {
-  "name": "middle.messenger.praktikum.yandex",
-  "private": true,
-  "version": "0.0.0",
-  "type": "module",
-  "engines": {
-    "node": ">=18"
-  },
-  "scripts": {
-    "start": "vite build && node server.cjs",
-    "build": "vite build",
-    "dev": "vite --open",
-    "preview": "vite preview",
-    "lint": "npx eslint .",
-    "lint:fix": "npm run lint -- --fix",
-    "prettier": "npx prettier . --check",
-    "prettier:fix": "npm run prettier -- --write",
-    "format": "npm run prettier:fix && npm run lint:fix"
-  },
-  "devDependencies": {
-    "@types/handlebars": "^4.1.0",
-    "@types/hbs": "^4.0.4",
-    "@typescript-eslint/eslint-plugin": "^8.6.0",
-    "@typescript-eslint/parser": "^8.6.0",
-    "eslint": "^8.57.1",
-    "eslint-config-airbnb": "^19.0.4",
-    "eslint-config-node": "^4.1.0",
-    "eslint-config-prettier": "^9.1.0",
-    "eslint-plugin-html": "^8.1.1",
-    "eslint-plugin-node": "^11.1.0",
-    "eslint-plugin-prettier": "^5.2.1",
-    "handlebars-loader": "^1.7.3",
-    "prettier": "^3.3.3",
-    "sass-embedded": "1.78.0",
-    "typescript": "5.5.4",
-    "vite": "5.4.1"
-  },
-  "dependencies": {
-    "express": "4.19.2",
-    "handlebars": "4.7.7",
-    "uuid": "^10.0.0"
-  }
+	"name": "middle.messenger.praktikum.yandex",
+	"private": true,
+	"version": "0.0.0",
+	"type": "module",
+	"engines": {
+		"node": ">=18"
+	},
+	"scripts": {
+		"start": "vite build && node server.cjs",
+		"build": "vite build",
+		"dev": "vite --open",
+		"preview": "vite preview",
+		"lint": "npx eslint .",
+		"lint:fix": "npm run lint -- --fix",
+		"prettier": "npx prettier . --check",
+		"prettier:fix": "npm run prettier -- --write",
+		"format": "npm run prettier:fix && npm run lint:fix"
+	},
+	"devDependencies": {
+		"@types/handlebars": "^4.1.0",
+		"@types/hbs": "^4.0.4",
+		"@typescript-eslint/eslint-plugin": "^8.6.0",
+		"@typescript-eslint/parser": "^8.6.0",
+		"eslint": "^8.57.1",
+		"eslint-config-airbnb": "^19.0.4",
+		"eslint-config-node": "^4.1.0",
+		"eslint-config-prettier": "^9.1.0",
+		"eslint-plugin-html": "^8.1.1",
+		"eslint-plugin-node": "^11.1.0",
+		"eslint-plugin-prettier": "^5.2.1",
+		"handlebars-loader": "^1.7.3",
+		"prettier": "^3.3.3",
+		"sass-embedded": "1.78.0",
+		"typescript": "5.5.4",
+		"vite": "5.4.1"
+	},
+	"dependencies": {
+		"express": "4.19.2",
+		"handlebars": "4.7.7",
+		"uuid": "^10.0.0"
+	}
 }
