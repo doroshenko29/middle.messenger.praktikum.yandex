@@ -1,12 +1,10 @@
 import Handlebars from 'handlebars';
 import * as Pages from './pages';
 import { mockLoginData, mockRegistrationData, mockProfileData } from './mocks';
-/* Register partials */
 import BackLink from './partials/back-link.hbs?raw';
 import AuthForm from './partials/auth-form.hbs?raw';
 import DevModeNav from './partials/dev-mode-nav.hbs?raw';
 import Link from './partials/link.hbs?raw';
-// import { ButtonBlock } from "./component/button/Button";
 
 Handlebars.registerPartial('BackLink', BackLink);
 Handlebars.registerPartial('AuthForm', AuthForm);

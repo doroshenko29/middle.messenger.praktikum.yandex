@@ -28,13 +28,6 @@ export default class Block<IProps extends IBlockProps = IBlockProps> {
 
 	_id: string | null = null;
 
-	/** JSDoc
-	 * @param {string} tagName
-	 * @param {Object} props
-	 *
-	 * @returns {void}
-	 */
-
 	constructor(
 		tagName = 'div',
 		propsAndChildren: Partial<IProps> & IChildren = {},
