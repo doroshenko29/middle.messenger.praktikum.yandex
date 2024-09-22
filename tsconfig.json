@@ -6,6 +6,9 @@
 		"module": "commonjs",
 		"strictNullChecks": true,
 		"sourceMap": true,
+		"noImplicitAny": true,
+		"noUnusedLocals": true,
+		"noUnusedParameters": true,
 		"lib": ["dom", "es2017"]
 	},
 	"include": ["src", "src/**/*.hbs"],

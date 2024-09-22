@@ -15,7 +15,9 @@
 		"lint:fix": "npm run lint -- --fix",
 		"prettier": "npx prettier . --check",
 		"prettier:fix": "npm run prettier -- --write",
-		"format": "npm run prettier:fix && npm run lint:fix"
+		"format": "npm run prettier:fix && npm run lint:fix",
+		"stylelint": "npx stylelint '**/*.scss'",
+		"stylelint:fix": "npx stylelint '**/*.scss' --fix"
 	},
 	"devDependencies": {
 		"@types/handlebars": "^4.1.0",
@@ -32,6 +34,8 @@
 		"handlebars-loader": "^1.7.3",
 		"prettier": "^3.3.3",
 		"sass-embedded": "1.78.0",
+		"stylelint": "^16.9.0",
+		"stylelint-config-standard-scss": "^13.1.0",
 		"typescript": "5.5.4",
 		"vite": "5.4.1"
 	},

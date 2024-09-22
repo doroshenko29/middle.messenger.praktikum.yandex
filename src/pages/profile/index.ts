@@ -24,7 +24,7 @@ export class ProfilePage extends Block {
 				new LinkBlock({
 					dataPage: 'login',
 					text: 'Выйти',
-					extraClass: ' exit__link',
+					extraClass: ' exit-link',
 				}),
 			],
 			avatar: new AvatarChangeBlock({

@@ -20,52 +20,47 @@ function renderBlock(root, block) {
 }
 
 export default class App {
-	constructor() {
-		this.state = {
-			currentPage: 'login',
-		};
-		this.appElement = document.getElementById('app');
-	}
+  protected state: IAppState = {
+    currentPage: PAGE.LOGIN,
+  }
+  protected readonly appElement = document.getElementById('app')!;
 
 	render() {
-		// const button = new ButtonBlock({
-		//   text: 'Click me',
-		//   events: {
-		//     click: event => {
-		//       console.log(event)
-		//     }
-		//   }
-		// });
-
-		// const profile = new UserProfile({
-		//   userName: 'Joe Doe',
-		//   button,
-		// })
-		// renderBlock(this.appElement, profile);
-		// setTimeout(() => {
-		// button.setProps({
-		//   text: 'Click me, please',
-		// });
-		// }, 1000);
-
 		const page = (() => {
 			switch (this.state.currentPage) {
-				case 'login': {
+				case PAGE.LOGIN: {
 					return new Pages.LoginPage(mockLoginData);
 				}
-				case 'registration': {
+				case PAGE.REGISTRATION: {
 					return new Pages.RegistrationPage(mockRegistrationData);
 				}
-				case 'profile': {
+        case PAGE.CHAT: {
+          return new Pages.ChatPage({
+            messages: [
+              {
+                id: '1',
+                name: 'vasya',
+              },
+            ],
+            message: {
+              '1': [
+                {
+                  text: 'lya'
+                },
+              ],
+            },
+          });
+        }
+				case PAGE.PROFILE: {
 					return new Pages.ProfilePage(mockProfileData);
 				}
-				case 'profile-change': {
+				case PAGE.PROFILE_CHANGE: {
 					return new Pages.ProfileChangePage(mockProfileData);
 				}
-				case 'profile-password-change': {
+				case PAGE.PROFILE_CHANGE_PASSWORD: {
 					return new Pages.ProfilePasswordChangePage(mockProfileData);
 				}
-				case 'error-5**': {
+				case PAGE.ERROR: {
 					return new Pages.ErrorPage({
 						errorCode: '500',
 						errorText: 'Мы уже фиксим',
@@ -75,7 +70,7 @@ export default class App {
 						},
 					});
 				}
-				case 'error-404':
+				case PAGE.ERROR_NOT_FOUND:
 				default: {
 					return new Pages.ErrorPage({
 						errorCode: '404',
@@ -98,9 +93,9 @@ export default class App {
 	attachEventListeners() {
 		const footerLinks = document.querySelectorAll('a');
 		footerLinks.forEach((link) => {
-			link.addEventListener('click', (e) => {
+			link.addEventListener('click', (e: Event) => {
 				e.preventDefault();
-				this.changePage(e.target.dataset.page);
+				this.changePage(e.target?.dataset.page);
 			});
 		});
 	}
@@ -110,3 +105,18 @@ export default class App {
 		this.render();
 	}
 }
+
+interface IAppState {
+  currentPage: PAGE | keyof typeof PAGE;
+}
+
+export enum PAGE {
+  LOGIN = "login",
+  REGISTRATION = "registration",
+  CHAT = "chat",
+  PROFILE = "profile",
+  PROFILE_CHANGE = "profile-change",
+  PROFILE_CHANGE_PASSWORD = "profile-password-change",
+  ERROR = "error-5**",
+  ERROR_NOT_FOUND = "error-404",
+};
