@@ -20,10 +20,11 @@ function renderBlock(root, block) {
 }
 
 export default class App {
-  protected state: IAppState = {
-    currentPage: PAGE.LOGIN,
-  }
-  protected readonly appElement = document.getElementById('app')!;
+	protected state: IAppState = {
+		currentPage: PAGE.LOGIN,
+	};
+
+	protected readonly appElement = document.getElementById('app')!;
 
 	render() {
 		const page = (() => {
@@ -34,23 +35,23 @@ export default class App {
 				case PAGE.REGISTRATION: {
 					return new Pages.RegistrationPage(mockRegistrationData);
 				}
-        case PAGE.CHAT: {
-          return new Pages.ChatPage({
-            messages: [
-              {
-                id: '1',
-                name: 'vasya',
-              },
-            ],
-            message: {
-              '1': [
-                {
-                  text: 'lya'
-                },
-              ],
-            },
-          });
-        }
+				case PAGE.CHAT: {
+					return new Pages.ChatPage({
+						messages: [
+							{
+								id: '1',
+								name: 'vasya',
+							},
+						],
+						message: {
+							'1': [
+								{
+									text: 'lya',
+								},
+							],
+						},
+					});
+				}
 				case PAGE.PROFILE: {
 					return new Pages.ProfilePage(mockProfileData);
 				}
@@ -107,16 +108,16 @@ export default class App {
 }
 
 interface IAppState {
-  currentPage: PAGE | keyof typeof PAGE;
+	currentPage: PAGE | keyof typeof PAGE;
 }
 
 export enum PAGE {
-  LOGIN = "login",
-  REGISTRATION = "registration",
-  CHAT = "chat",
-  PROFILE = "profile",
-  PROFILE_CHANGE = "profile-change",
-  PROFILE_CHANGE_PASSWORD = "profile-password-change",
-  ERROR = "error-5**",
-  ERROR_NOT_FOUND = "error-404",
-};
+	LOGIN = 'login',
+	REGISTRATION = 'registration',
+	CHAT = 'chat',
+	PROFILE = 'profile',
+	PROFILE_CHANGE = 'profile-change',
+	PROFILE_CHANGE_PASSWORD = 'profile-password-change',
+	ERROR = 'error-5**',
+	ERROR_NOT_FOUND = 'error-404',
+}

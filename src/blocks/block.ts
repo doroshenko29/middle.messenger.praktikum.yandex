@@ -1,13 +1,15 @@
 import Handlebars from 'handlebars';
+import { v4 as makeUUID } from 'uuid';
 import EventBus from '../utils/event-bus';
 import NeedArray from '../utils/NeedArray';
-import { v4 as makeUUID } from 'uuid';
 
 type IChildren = Record<string, Array<Block> | Block>;
 
 export default class Block<IProps extends IBlockProps = IBlockProps> {
 	protected eventBus: () => EventBus;
+
 	protected children: IChildren;
+
 	protected props: Partial<IProps> = {};
 
 	static EVENTS = {
@@ -18,10 +20,12 @@ export default class Block<IProps extends IBlockProps = IBlockProps> {
 	};
 
 	_element: null | HTMLElement = null;
+
 	_meta: null | {
 		tagName: string;
 		props: Partial<IProps>;
 	} = null;
+
 	_id: string | null = null;
 
 	/** JSDoc
@@ -54,6 +58,7 @@ export default class Block<IProps extends IBlockProps = IBlockProps> {
 		this._registerEvents(eventBus);
 		eventBus.emit(Block.EVENTS.INIT);
 	}
+
 	events: Record<string, () => void>;
 
 	_addEvents() {
@@ -211,9 +216,10 @@ export default class Block<IProps extends IBlockProps = IBlockProps> {
 		const propsAndStubs = { ...props };
 
 		Object.entries(this.children).forEach(([key, child]) => {
-			propsAndStubs[key] = NeedArray(child).reduce((acc, current) => {
-				return (acc += `<div data-id="${current._id}"></div>`);
-			}, '');
+			propsAndStubs[key] = NeedArray(child).reduce(
+				(acc, current) => (acc += `<div data-id="${current._id}"></div>`),
+				'',
+			);
 		});
 
 		const fragment = this._createDocumentElement('template');

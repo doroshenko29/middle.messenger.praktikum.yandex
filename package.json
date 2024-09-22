@@ -15,9 +15,11 @@
 		"lint:fix": "npm run lint -- --fix",
 		"prettier": "npx prettier . --check",
 		"prettier:fix": "npm run prettier -- --write",
-		"format": "npm run prettier:fix && npm run lint:fix",
-		"stylelint": "npx stylelint '**/*.scss'",
-		"stylelint:fix": "npx stylelint '**/*.scss' --fix"
+		"stylelint": "npx stylelint **/*.scss",
+		"stylelint:fix": "npx stylelint **/*.scss' --fix",
+		"ts-check": "tsc --noEmit",
+		"check-code-quality": "npm run prettier && npm run lint && npm run stylelint && npm run ts-check",
+		"format": "npm run prettier:fix && npm run lint:fix && npm run stylelint:fix"
 	},
 	"devDependencies": {
 		"@types/handlebars": "^4.1.0",
