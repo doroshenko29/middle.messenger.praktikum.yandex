@@ -1,12 +1,12 @@
 import Block from '../../blocks/block';
-import { AvatarChangeBlock } from '../../component/avatar-change/AvatarChange';
-import { ButtonBlock } from '../../component/button/Button';
-import { FormFieldBlock } from '../../component/form-field/FormField';
+import AvatarChangeBlock from '../../component/avatar-change/AvatarChange';
+import ButtonBlock from '../../component/button/Button';
+import FormFieldBlock from '../../component/form-field/FormField';
 import Template from './profile-password-change.hbs?raw';
 
-export class ProfilePasswordChangePage extends Block {
+export default class ProfilePasswordChangePage extends Block {
 	constructor(props) {
-		super('div', props);
+		super('div', {...props, classNames: ["page"]});
 	}
 
 	render() {

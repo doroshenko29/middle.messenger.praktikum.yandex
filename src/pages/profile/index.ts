@@ -1,12 +1,12 @@
 import Block from '../../blocks/block';
-import { AvatarChangeBlock } from '../../component/avatar-change/AvatarChange';
-import { FormFieldBlock } from '../../component/form-field/FormField';
-import { LinkBlock } from '../../component/link/Link';
+import AvatarChangeBlock from '../../component/avatar-change/AvatarChange';
+import FormFieldBlock from '../../component/form-field/FormField';
+import LinkBlock from '../../component/link/Link';
 import Template from './profile.hbs?raw';
 
-export class ProfilePage extends Block {
+export default class ProfilePage extends Block {
 	constructor(props) {
-		super('div', props);
+		super('div', {...props, classNames: ["page"]});
 	}
 
 	render() {

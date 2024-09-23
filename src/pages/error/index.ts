@@ -1,10 +1,10 @@
 import Block from '../../blocks/block';
-import { LinkBlock } from '../../component/link/Link';
+import LinkBlock from '../../component/link/Link';
 import Template from './error.hbs?raw';
 
-export class ErrorPage extends Block {
+export default class ErrorPage extends Block {
 	constructor(props) {
-		super('div', props);
+		super('div', {...props, classNames: ["page"]});
 	}
 
 	render() {

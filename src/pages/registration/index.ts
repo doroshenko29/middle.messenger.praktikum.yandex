@@ -1,12 +1,12 @@
 import Block from '../../blocks/block';
-import { ButtonBlock } from '../../component/button/Button';
-import { FormFieldBlock } from '../../component/form-field/FormField';
-import { LinkBlock } from '../../component/link/Link';
+import ButtonBlock from '../../component/button/Button';
+import FormFieldBlock from '../../component/form-field/FormField';
+import LinkBlock from '../../component/link/Link';
 import Template from './registration.hbs?raw';
 
-export class RegistrationPage extends Block {
+export default class RegistrationPage extends Block {
 	constructor(props) {
-		super('div', props);
+		super('div', {...props, classNames: ["page"]});
 	}
 
 	render() {

@@ -1,0 +1,22 @@
+<div class="chat">
+    <div class="chat-avatar"></div>
+    <div class="chat-info">
+        <div class="chat-info-name">{{name}}</div>
+		{{#if message}}
+        	<div class="chat-info-message">
+				{{#if myMessage}}
+				<span class="chat-info-message-mine">Вы: </span>
+				{{/if}}
+				{{message}}
+			</div>
+		{{/if}}
+    </div>
+    <div class="chat-description">
+		{{#if time}}
+        <div class="chat-description-time">{{time}}</div>
+		{{/if}}
+		{{#if unreadsCount}}
+        <div class="chat-description-count">{{unreadsCount}}</div>
+		{{/if}}
+    </div>
+</div>

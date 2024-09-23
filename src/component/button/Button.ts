@@ -1,7 +1,7 @@
 import Block from '../../blocks/block';
 import ButtonTemplate from './button.hbs?raw';
 
-export class ButtonBlock extends Block {
+export default class ButtonBlock extends Block {
 	constructor(props) {
 		super('div', props);
 	}

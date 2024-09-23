@@ -10,7 +10,7 @@ export default class Block<IProps extends IBlockProps = IBlockProps> {
 
 	protected children: IChildren;
 
-	protected props: Partial<IProps> = {};
+	public props: Partial<IProps> = {};
 
 	static EVENTS = {
 		INIT: 'init',

@@ -19,7 +19,7 @@ function renderBlock(root, block) {
 
 export default class App {
 	protected state: IAppState = {
-		currentPage: PAGE.LOGIN,
+		currentPage: PAGE.CHAT,
 	};
 
 	protected readonly appElement = document.getElementById('app')!;
@@ -35,19 +35,29 @@ export default class App {
 				}
 				case PAGE.CHAT: {
 					return new Pages.ChatPage({
-						messages: [
+						chats: [
 							{
-								id: '1',
-								name: 'vasya',
+								id: '11',
+								name: 'Андрей',
+								message: 'text',
+								time: '10:49',
+								unreadsCount: '2',
+								myMessage: true,
+							},
+							{
+								id: '12',
+								name: 'Vasya',
 							},
 						],
-						message: {
-							'1': [
-								{
-									text: 'lya',
-								},
-							],
-						},
+						currentChat: [
+							{
+								text: 'ывавава',
+							},
+							{
+								text: 'вввввв',
+								isMine: true,
+							},
+						],
 					});
 				}
 				case PAGE.PROFILE: {

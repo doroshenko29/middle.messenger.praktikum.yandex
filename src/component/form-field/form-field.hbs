@@ -1,4 +1,6 @@
-<label for={{name}} class='form-field__label'>{{label}}</label>
+{{#if label}}
+	<label for={{name}} class='form-field__label'>{{label}}</label>
+{{/if}}
 {{#if value}}
 	<input
 		type={{type}}

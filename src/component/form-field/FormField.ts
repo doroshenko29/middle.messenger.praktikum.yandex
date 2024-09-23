@@ -1,9 +1,21 @@
 import Block from '../../blocks/block';
+import NeedArray from '../../utils/NeedArray';
 import FormFieldTemplate from './form-field.hbs?raw';
 
-export class FormFieldBlock extends Block {
+export default class FormFieldBlock extends Block {
 	constructor(props) {
-		super('section', { ...props, classNames: ['form-field'] });
+		super('div', {
+			...props,
+			classNames: [...NeedArray(props.classNames), 'form-field'],
+			events: {
+				change: event => {
+					event.preventDefault();
+					this.setProps({
+						value: event.target.value,
+					});
+				},
+			},
+		});
 	}
 
 	render() {

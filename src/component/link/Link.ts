@@ -1,7 +1,7 @@
 import Block from '../../blocks/block';
 import Link from './link.hbs?raw';
 
-export class LinkBlock extends Block {
+export default class LinkBlock extends Block {
 	constructor(props) {
 		super('div', props);
 	}
