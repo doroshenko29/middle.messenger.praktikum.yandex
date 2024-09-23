@@ -8,7 +8,7 @@ export default class FormFieldBlock extends Block {
 			...props,
 			classNames: [...NeedArray(props.classNames), 'form-field'],
 			events: {
-				change: event => {
+				change: (event) => {
 					event.preventDefault();
 					this.setProps({
 						value: event.target.value,

@@ -6,7 +6,7 @@ import Template from './registration.hbs?raw';
 
 export default class RegistrationPage extends Block {
 	constructor(props) {
-		super('div', {...props, classNames: ["page"]});
+		super('div', { ...props, classNames: ['page'] });
 	}
 
 	render() {

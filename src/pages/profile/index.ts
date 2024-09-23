@@ -6,7 +6,7 @@ import Template from './profile.hbs?raw';
 
 export default class ProfilePage extends Block {
 	constructor(props) {
-		super('div', {...props, classNames: ["page"]});
+		super('div', { ...props, classNames: ['page'] });
 	}
 
 	render() {

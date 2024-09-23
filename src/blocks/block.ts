@@ -108,9 +108,9 @@ export default class Block<IProps extends IBlockProps = IBlockProps> {
 		this.componentDidMount();
 
 		Object.values(this.children).forEach((child) => {
-			for (const _child of NeedArray(child)) {
+			NeedArray(child).forEach((_child) => {
 				_child.dispatchComponentDidMount();
-			}
+			});
 		});
 	}
 
@@ -129,9 +129,8 @@ export default class Block<IProps extends IBlockProps = IBlockProps> {
 		this._render();
 	}
 
-	// Может переопределять пользователь, необязательно трогать
 	componentDidUpdate(oldProps, newProps) {
-		return true;
+		return oldProps !== newProps;
 	}
 
 	setProps = (nextProps) => {
@@ -167,21 +166,17 @@ export default class Block<IProps extends IBlockProps = IBlockProps> {
 	}
 
 	_makePropsProxy(props) {
-		// Можно и так передать this
-		// Такой способ больше не применяется с приходом ES6+
-		const self = this;
-
 		return new Proxy(props, {
-			get(target, prop) {
+			get: (target, prop) => {
 				const value = target[prop];
 				return typeof value === 'function' ? value.bind(target) : value;
 			},
-			set(target, prop, value) {
-				target[prop] = value;
-				self.eventBus().emit(Block.EVENTS.FLOW_CDU, { ...target }, target);
+			set: (target, prop, value) => {
+				Object.assign(target, { [prop]: value });
+				this.eventBus().emit(Block.EVENTS.FLOW_CDU, { ...target }, target);
 				return true;
 			},
-			deleteProperty() {
+			deleteProperty: () => {
 				throw new Error('Нет доступа');
 			},
 		});
@@ -209,8 +204,8 @@ export default class Block<IProps extends IBlockProps = IBlockProps> {
 		const propsAndStubs = { ...props };
 
 		Object.entries(this.children).forEach(([key, child]) => {
-			propsAndStubs[key] = NeedArray(child).reduce(
-				(acc, current) => (acc += `<div data-id="${current._id}"></div>`),
+			propsAndStubs[key] = NeedArray(child).reduce<string>(
+				(acc, current) => `${acc}<div data-id="${current._id}"></div>`,
 				'',
 			);
 		});

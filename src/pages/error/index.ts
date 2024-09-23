@@ -4,7 +4,7 @@ import Template from './error.hbs?raw';
 
 export default class ErrorPage extends Block {
 	constructor(props) {
-		super('div', {...props, classNames: ["page"]});
+		super('div', { ...props, classNames: ['page'] });
 	}
 
 	render() {

@@ -6,7 +6,7 @@ import Template from './profile-password-change.hbs?raw';
 
 export default class ProfilePasswordChangePage extends Block {
 	constructor(props) {
-		super('div', {...props, classNames: ["page"]});
+		super('div', { ...props, classNames: ['page'] });
 	}
 
 	render() {
