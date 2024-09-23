@@ -1,11 +1,13 @@
-import Block from '../../blocks/block';
+import Block, { IBlockProps } from '../../blocks/block';
 import Template from './message.hbs?raw';
 
-export default class MessageBlock extends Block {
-	constructor(props) {
+export default class MessageBlock extends Block<IMessageProps> {
+	constructor(protected props: IMessageProps) {
 		super('div', {
 			...props,
-			classNames: ['message', props.isMine ? 'mine' : null].filter(Boolean),
+			classNames: ['message', props.isMine ? 'mine' : null].filter(
+				Boolean,
+			) as string[],
 		});
 		const classNames = ['message'];
 		if (this.props.isMine) {
@@ -19,4 +21,9 @@ export default class MessageBlock extends Block {
 	render() {
 		return this.compile(Template, { ...this.props });
 	}
+}
+
+export interface IMessageProps extends IBlockProps {
+	text: string;
+	isMine: boolean;
 }

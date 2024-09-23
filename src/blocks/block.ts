@@ -3,14 +3,14 @@ import { v4 as makeUUID } from 'uuid';
 import EventBus from '../utils/event-bus';
 import NeedArray from '../utils/NeedArray';
 
-type IChildren = Record<string, Array<Block> | Block>;
+type IChildren = Record<string, Array<Block> | Block> | string;
 
 export default class Block<IProps extends IBlockProps = IBlockProps> {
 	protected eventBus: () => EventBus;
 
 	protected children: IChildren;
 
-	public props: Partial<IProps> = {};
+	protected props: Partial<IProps> = {};
 
 	static EVENTS = {
 		INIT: 'init',
@@ -30,7 +30,7 @@ export default class Block<IProps extends IBlockProps = IBlockProps> {
 
 	constructor(
 		tagName = 'div',
-		propsAndChildren: Partial<IProps> & IChildren = {},
+		propsAndChildren: Partial<IProps> & { children?: IChildren } = {},
 	) {
 		const { children, props = {} } = this._getChildren(propsAndChildren);
 		this.children = children;
@@ -55,22 +55,28 @@ export default class Block<IProps extends IBlockProps = IBlockProps> {
 	events: Record<string, () => void>;
 
 	_addEvents() {
-		const { events = {} } = this.props;
+		const { events } = this.props;
+		if (!events) {
+			return;
+		}
 		Object.keys(events).forEach((eventName) => {
 			this._element?.addEventListener(eventName, events[eventName]);
 		});
 	}
 
 	_removeEvents() {
-		const { events = {} } = this.props;
+		const { events } = this.props;
+		if (!events) {
+			return;
+		}
 		Object.keys(events).forEach((eventName) => {
 			this._element?.removeEventListener(eventName, events[eventName]);
 		});
 	}
 
-	_getChildren(propsAndChildren) {
-		const children = {};
-		const props = {};
+	_getChildren(propsAndChildren: Partial<IProps> & { children?: IChildren }) {
+		const children = Object.create({});
+		const props = Object.create({});
 
 		// @todo for of
 		Object.entries(propsAndChildren).forEach(([key, value]) => {
@@ -84,7 +90,7 @@ export default class Block<IProps extends IBlockProps = IBlockProps> {
 		return { children, props };
 	}
 
-	_registerEvents(eventBus) {
+	_registerEvents(eventBus: EventBus) {
 		eventBus.on(Block.EVENTS.INIT, this.init.bind(this));
 		eventBus.on(Block.EVENTS.FLOW_CDM, this._componentDidMount.bind(this));
 		eventBus.on(Block.EVENTS.FLOW_CDU, this._componentDidUpdate.bind(this));
@@ -121,7 +127,7 @@ export default class Block<IProps extends IBlockProps = IBlockProps> {
 		this.eventBus().emit(Block.EVENTS.FLOW_CDM);
 	}
 
-	_componentDidUpdate(oldProps, newProps) {
+	_componentDidUpdate(oldProps: IProps, newProps: IProps) {
 		const response = this.componentDidUpdate(oldProps, newProps);
 		if (!response) {
 			return;
@@ -129,11 +135,11 @@ export default class Block<IProps extends IBlockProps = IBlockProps> {
 		this._render();
 	}
 
-	componentDidUpdate(oldProps, newProps) {
+	componentDidUpdate(oldProps: IProps, newProps: IProps) {
 		return oldProps !== newProps;
 	}
 
-	setProps = (nextProps) => {
+	setProps = (nextProps: IProps) => {
 		if (!nextProps) {
 			return;
 		}
@@ -165,10 +171,10 @@ export default class Block<IProps extends IBlockProps = IBlockProps> {
 		return this.element;
 	}
 
-	_makePropsProxy(props) {
-		return new Proxy(props, {
+	_makePropsProxy(props: IProps) {
+		return new Proxy<IProps>(props, {
 			get: (target, prop) => {
-				const value = target[prop];
+				const value = target[prop as keyof IProps];
 				return typeof value === 'function' ? value.bind(target) : value;
 			},
 			set: (target, prop, value) => {
@@ -200,8 +206,9 @@ export default class Block<IProps extends IBlockProps = IBlockProps> {
 		this.getContent()!.style.display = 'none';
 	}
 
-	compile(_template, props) {
-		const propsAndStubs = { ...props };
+	compile(_template: string, props: IProps) {
+		let propsAndStubs = Object.create({});
+		propsAndStubs = { ...props };
 
 		Object.entries(this.children).forEach(([key, child]) => {
 			propsAndStubs[key] = NeedArray(child).reduce<string>(
@@ -231,6 +238,6 @@ export default class Block<IProps extends IBlockProps = IBlockProps> {
 }
 
 export interface IBlockProps {
-	events: Record<string, () => void>;
-	classNames: Array<string>;
+	events?: Record<string, (event: Event) => void>;
+	classNames?: Array<string>;
 }

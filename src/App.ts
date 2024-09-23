@@ -5,14 +5,15 @@ import BackLink from './partials/back-link.hbs?raw';
 import AuthForm from './partials/auth-form.hbs?raw';
 import DevModeNav from './partials/dev-mode-nav.hbs?raw';
 import Link from './partials/link.hbs?raw';
+import Block from './blocks/block';
 
 Handlebars.registerPartial('BackLink', BackLink);
 Handlebars.registerPartial('AuthForm', AuthForm);
 Handlebars.registerPartial('DevModeNav', DevModeNav);
 Handlebars.registerPartial('Link', Link);
 
-function renderBlock(root, block) {
-	root.appendChild(block.getContent());
+function renderBlock(root: HTMLElement, block: Block) {
+	root.appendChild(block.getContent()!);
 	block.dispatchComponentDidMount();
 	return root;
 }
@@ -25,7 +26,7 @@ export default class App {
 	protected readonly appElement = document.getElementById('app')!;
 
 	render() {
-		const page = (() => {
+		const page: Block = (() => {
 			switch (this.state.currentPage) {
 				case PAGE.LOGIN: {
 					return new Pages.LoginPage(mockLoginData);
@@ -104,12 +105,12 @@ export default class App {
 		footerLinks.forEach((link) => {
 			link.addEventListener('click', (e: Event) => {
 				e.preventDefault();
-				this.changePage(e.target?.dataset.page);
+				this.changePage((e.target as HTMLElement).dataset.page as PAGE);
 			});
 		});
 	}
 
-	changePage(page) {
+	changePage(page: PAGE) {
 		this.state.currentPage = page;
 		this.render();
 	}
