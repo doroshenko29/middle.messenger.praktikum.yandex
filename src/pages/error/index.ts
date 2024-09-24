@@ -15,11 +15,16 @@ export default class ErrorPage extends Block<IErrorPageProps> {
 				text: 'Назад к чатам',
 			}),
 		};
+		this.children = {
+			linkToChat: new LinkBlock({
+				dataPage: PAGE.CHAT,
+				text: 'Назад к чатам',
+			}),
+		};
 
 		return this.compile(Template, { ...this.props });
 	}
 }
-
 
 export interface IErrorPageProps extends IBlockProps {
 	errorCode: string;
