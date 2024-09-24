@@ -2,16 +2,17 @@ import Block from '../../blocks/block';
 import AvatarChangeBlock from '../../component/avatar-change/AvatarChange';
 import ButtonBlock from '../../component/button/Button';
 import FormFieldBlock from '../../component/form-field/FormField';
+import { mockProfileData } from '../../mocks';
 import Template from './profile-password-change.hbs?raw';
 
 export default class ProfilePasswordChangePage extends Block {
-	constructor(props) {
-		super('div', { ...props, classNames: ['page'] });
+	constructor() {
+		super('div', { classNames: ['page'] });
 	}
 
 	render() {
 		this.children = {
-			fields: this.props.password_fields.map(
+			fields: mockProfileData.password_fields.map(
 				(field) => new FormFieldBlock(field),
 			),
 			avatar: new AvatarChangeBlock({

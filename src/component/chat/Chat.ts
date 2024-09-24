@@ -12,9 +12,10 @@ export default class ChatBlock extends Block<IChatProps> {
 }
 
 export interface IChatProps extends IBlockProps {
+	id: string;
 	name: string;
-	message: string;
-	myMessage: boolean;
-	time: string;
-	unreadsCount: number;
+	message?: string;
+	myMessage?: boolean;
+	time?: string;
+	unreadsCount?: number;
 }

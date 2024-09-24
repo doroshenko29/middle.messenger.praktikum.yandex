@@ -8,9 +8,9 @@
 	--error-color: #f82d17;
 	--form-primary-text-color: #999;
 	--form-secondary-text-color: #242424;
-	--message-color: #E4EDFD;
+	--message-color: #e4edfd;
 	--font-family-common: inter, system-ui, avenir, helvetica, arial, sans-serif;
-	
+
 	font-family: var(--font-family-common);
 	line-height: 1.5;
 	font-weight: 400;
@@ -50,13 +50,15 @@ body {
 	flex: 1;
 	height: 100%;
 
-	.page, .page-wrapper {
+	.page,
+	.page-wrapper {
 		display: flex;
 		flex: 1;
 		flex-direction: column;
 	}
 
-	.profile-page, .chat-page {
+	.profile-page,
+	.chat-page {
 		flex-direction: row;
 	}
 }
@@ -264,7 +266,7 @@ input {
 .profile .form-field:not(:last-child) {
 	border-bottom: 1px solid var(--background-color);
 }
-	
+
 .auth-form .form-field:last-child {
 	margin-bottom: 40px;
 }
@@ -358,7 +360,7 @@ input {
 			&-count {
 				color: var(--primary-text-color);
 				font-size: 12px;
-				width: 20px; 
+				width: 20px;
 				height: 20px;
 				display: flex;
 				justify-content: center;
@@ -369,12 +371,12 @@ input {
 		}
 	}
 
-	&-chats {    
+	&-chats {
 		display: flex;
 		flex-direction: column;
 		width: 310px;
 		max-width: 30%;
-		background: #FBFBFB;
+		background: #fbfbfb;
 		border-right: 1px solid var(--background-color);
 		padding: 0 10px;
 
@@ -443,7 +445,7 @@ input {
 						width: 100%;
 						border-radius: 36px;
 						padding: 0 15px;
-						height: 36px;	
+						height: 36px;
 						background-color: inherit;
 						color: var(--secondary-text-color);
 						font-weight: 500;

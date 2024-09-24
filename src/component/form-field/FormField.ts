@@ -11,7 +11,7 @@ export default class FormFieldBlock extends Block<IFormFieldProps> {
 				change: (event) => {
 					event.preventDefault();
 					this.setProps({
-						value: event.target?.value,
+						value: (event.target as HTMLInputElement).value,
 					});
 				},
 			},

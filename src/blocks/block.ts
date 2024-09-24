@@ -139,7 +139,7 @@ export default class Block<IProps extends IBlockProps = IBlockProps> {
 		return oldProps !== newProps;
 	}
 
-	setProps = (nextProps: IProps) => {
+	setProps = (nextProps: Partial<IProps>) => {
 		if (!nextProps) {
 			return;
 		}
@@ -191,11 +191,11 @@ export default class Block<IProps extends IBlockProps = IBlockProps> {
 	_createDocumentElement(
 		tagName: string,
 		classNames: IProps['classNames'] = [],
-	) {
+	): HTMLTemplateElement {
 		const element = document.createElement(tagName);
 		element.setAttribute('data-id', this._id!);
-		element.classList.add(...classNames);
-		return element;
+		element.classList.add(...NeedArray(classNames));
+		return element as HTMLTemplateElement;
 	}
 
 	show() {
@@ -229,7 +229,9 @@ export default class Block<IProps extends IBlockProps = IBlockProps> {
 					`[data-id="${_child._id}"]`,
 				);
 
-				stub.replaceWith(_child.getContent());
+				if (stub) {
+					stub.replaceWith(_child.getContent());
+				}
 			});
 		});
 

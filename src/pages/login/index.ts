@@ -1,16 +1,18 @@
-import Block from '../../blocks/block';
+import { PAGE } from '../../App';
+import Block, { IBlockProps } from '../../blocks/block';
 import ButtonBlock from '../../component/button/Button';
 import FormFieldBlock from '../../component/form-field/FormField';
 import LinkBlock from '../../component/link/Link';
+import { mockLoginData } from '../../mocks';
 import Template from './login.hbs?raw';
 
-export default class LoginPage extends Block {
-	constructor(props) {
-		super('div', { ...props, classNames: ['page'] });
+export default class LoginPage extends Block<ILoginProps> {
+	constructor() {
+		super('div', { classNames: ['page'] });
 	}
 
 	render() {
-		const fields = this.props.fieldsDto.map(
+		const fields = mockLoginData.fieldsDto.map(
 			(field) =>
 				new FormFieldBlock({
 					...field,
@@ -18,7 +20,7 @@ export default class LoginPage extends Block {
 		);
 		this.children = {
 			linkToRegistration: new LinkBlock({
-				dataPage: 'registration',
+				dataPage: PAGE.REGISTRATION,
 				text: 'Нет аккаунта?',
 			}),
 			buttonSubmit: new ButtonBlock({
@@ -28,13 +30,17 @@ export default class LoginPage extends Block {
 					// click, mouseEnter, ...
 					click: (event) => {
 						event.preventDefault();
-						fields.forEach((el) => console.log(el.props.value));
+						fields.forEach((el) => console.log(el.getContent()));
 					},
 				},
 			}),
 			fields,
 		};
 
-		return this.compile(Template, { ...this.props });
+		return this.compile(Template, { title: 'Вход' });
 	}
+}
+
+export interface ILoginProps extends IBlockProps {
+	title: string;
 }

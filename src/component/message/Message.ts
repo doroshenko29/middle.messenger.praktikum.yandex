@@ -14,7 +14,7 @@ export default class MessageBlock extends Block<IMessageProps> {
 			classNames.push('mine');
 		}
 		this.setProps({
-			classNames,
+			classNames: classNames,
 		});
 	}
 
@@ -25,5 +25,5 @@ export default class MessageBlock extends Block<IMessageProps> {
 
 export interface IMessageProps extends IBlockProps {
 	text: string;
-	isMine: boolean;
+	isMine?: boolean;
 }

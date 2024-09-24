@@ -19,7 +19,7 @@
 		"no-use-before-define": "off",
 		"no-underscore-dangle": "off",
 		"no-unused-vars": "off",
-    	"@typescript-eslint/no-unused-vars": "error",
+		"@typescript-eslint/no-unused-vars": "error",
 		"import/no-extraneous-dependencies": "off",
 		"no-shadow": "off"
 	}

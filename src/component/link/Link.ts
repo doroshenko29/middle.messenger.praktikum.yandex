@@ -14,6 +14,6 @@ export default class LinkBlock extends Block<ILinkProps> {
 
 export interface ILinkProps extends IBlockProps {
 	text: string;
-	extraClass: string;
+	extraClass?: string;
 	dataPage: PAGE;
 }

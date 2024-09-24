@@ -1,6 +1,5 @@
 import Handlebars from 'handlebars';
 import * as Pages from './pages';
-import { mockLoginData, mockRegistrationData, mockProfileData } from './mocks';
 import BackLink from './partials/back-link.hbs?raw';
 import AuthForm from './partials/auth-form.hbs?raw';
 import DevModeNav from './partials/dev-mode-nav.hbs?raw';
@@ -29,55 +28,27 @@ export default class App {
 		const page: Block = (() => {
 			switch (this.state.currentPage) {
 				case PAGE.LOGIN: {
-					return new Pages.LoginPage(mockLoginData);
+					return new Pages.LoginPage();
 				}
 				case PAGE.REGISTRATION: {
-					return new Pages.RegistrationPage(mockRegistrationData);
+					return new Pages.RegistrationPage();
 				}
 				case PAGE.CHAT: {
-					return new Pages.ChatPage({
-						chats: [
-							{
-								id: '11',
-								name: 'Андрей',
-								message: 'text',
-								time: '10:49',
-								unreadsCount: '2',
-								myMessage: true,
-							},
-							{
-								id: '12',
-								name: 'Vasya',
-							},
-						],
-						currentChat: [
-							{
-								text: 'ывавава',
-							},
-							{
-								text: 'вввввв',
-								isMine: true,
-							},
-						],
-					});
+					return new Pages.ChatPage();
 				}
 				case PAGE.PROFILE: {
-					return new Pages.ProfilePage(mockProfileData);
+					return new Pages.ProfilePage();
 				}
 				case PAGE.PROFILE_CHANGE: {
-					return new Pages.ProfileChangePage(mockProfileData);
+					return new Pages.ProfileChangePage();
 				}
 				case PAGE.PROFILE_CHANGE_PASSWORD: {
-					return new Pages.ProfilePasswordChangePage(mockProfileData);
+					return new Pages.ProfilePasswordChangePage();
 				}
 				case PAGE.ERROR: {
 					return new Pages.ErrorPage({
 						errorCode: '500',
 						errorText: 'Мы уже фиксим',
-						linkToChat: {
-							dataPage: 'chat',
-							text: 'Назад к чатам',
-						},
 					});
 				}
 				case PAGE.ERROR_NOT_FOUND:
@@ -85,10 +56,6 @@ export default class App {
 					return new Pages.ErrorPage({
 						errorCode: '404',
 						errorText: 'Не туда попали',
-						linkToChat: {
-							dataPage: 'chat',
-							text: 'Назад к чатам',
-						},
 					});
 				}
 			}
