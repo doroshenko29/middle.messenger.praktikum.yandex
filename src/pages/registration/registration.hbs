@@ -1,8 +1,12 @@
-<main class="page-wrapper">
-  {{#> AuthForm title=title }}
-    {{{fields}}}
-    {{{buttonSubmit}}}
-    {{{linkToAuthorize}}}
-  {{/AuthForm }}
-</main>
-{{{devModeNav}}}
+<div class='page'>
+  <main class="page-wrapper">
+    {{#> AuthForm title=title }}
+      {{#each Fields}}
+      {{{this}}}
+      {{/each}}
+      {{{ButtonSubmit}}}
+      {{{LinkToAuthorize}}}
+    {{/AuthForm }}
+  </main>
+  {{{DevModeNav}}}
+</div>

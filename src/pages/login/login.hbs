@@ -1,8 +1,9 @@
 <div class='page'>
   <main class="page-wrapper">
     {{#> AuthForm title="Вход" }}
-      {{{Login}}}
-      {{{Password}}}
+       {{#each Fields}}
+        {{{this}}}
+      {{/each}}
       {{{ButtonSubmit}}}
       {{{LinkToRegistration}}}
     {{/AuthForm }}

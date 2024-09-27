@@ -4,12 +4,12 @@ import ButtonBlock from '../../component/button/Button';
 import DevModeNavBlock from '../../component/DevModeNav/DevModeNav';
 import FormFieldBlock from '../../component/form-field/FormField';
 import LinkBlock from '../../component/link/Link';
+import LOGIN_FIELDS_DTO from '../../constants/LoginFieldsDto';
 import Template from './login.hbs?raw';
 
 export default class LoginPage extends Block {
 	constructor() {
 		super({
-			classNames: ['page'],
 			LinkToRegistration: new LinkBlock({
 				dataPage: PAGE.REGISTRATION,
 				text: 'Нет аккаунта?',
@@ -17,28 +17,7 @@ export default class LoginPage extends Block {
 			ButtonSubmit: new ButtonBlock({
 				text: 'Авторизоваться',
 			}),
-			Login: new FormFieldBlock({
-				label: 'Логин',
-				name: 'login',
-				type: 'text',
-				validatorCallback: (value) => {
-					if(value!.toString().includes('doro')) {
-						return 'NO DORO'
-					}
-					return null;
-				}
-			}),
-			Password: new FormFieldBlock({
-				label: 'Пароль',
-				name: 'password',
-				type: 'password',
-				validatorCallback: (value) => {
-					if(value!.toString().includes('123')) {
-						return 'NO NO NO KEK'
-					}
-					return null;
-				}
-			}),
+			Fields: LOGIN_FIELDS_DTO.map((field) => new FormFieldBlock(field)),
 			DevModeNav: new DevModeNavBlock(),
 			events: {
 				submit: (event) => {
