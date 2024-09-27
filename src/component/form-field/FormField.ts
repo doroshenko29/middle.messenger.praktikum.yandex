@@ -1,20 +1,31 @@
 import Block, { IBlockProps } from '../../blocks/block';
 import NeedArray from '../../utils/NeedArray';
+import InputBlock from '../Input/Input';
+import LabelBlock from '../Label/Label';
 import FormFieldTemplate from './form-field.hbs?raw';
 
 export default class FormFieldBlock extends Block<IFormFieldProps> {
 	constructor(protected props: IFormFieldProps) {
-		super('div', {
+		super({
 			...props,
 			classNames: [...NeedArray(props.classNames!), 'form-field'],
-			events: {
-				change: (event) => {
-					event.preventDefault();
-					this.setProps({
-						value: (event.target as HTMLInputElement).value,
-					});
-				},
-			},
+			Label: new LabelBlock({
+				...props,
+			}),
+			Input: new InputBlock({
+				...props,
+				OnBlur: (e) => {
+					console.log(e)
+				}
+			})
+			// events: {
+			// 	change: (event) => {
+			// 		event.preventDefault();
+			// 		this.setProps({
+			// 			value: (event.target as HTMLInputElement).value,
+			// 		});
+			// 	},
+			// },
 		});
 	}
 

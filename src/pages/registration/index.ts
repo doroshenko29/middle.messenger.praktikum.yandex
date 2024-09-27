@@ -1,6 +1,7 @@
 import { PAGE } from '../../App';
 import Block, { IBlockProps } from '../../blocks/block';
 import ButtonBlock from '../../component/button/Button';
+import DevModeNavBlock from '../../component/DevModeNav/DevModeNav';
 import FormFieldBlock from '../../component/form-field/FormField';
 import LinkBlock from '../../component/link/Link';
 import { mockRegistrationData } from '../../mocks';
@@ -8,7 +9,7 @@ import Template from './registration.hbs?raw';
 
 export default class RegistrationPage extends Block<IRegistrationProps> {
 	constructor() {
-		super('div', { classNames: ['page'] });
+		super({ classNames: ['page'] }, 'div');
 	}
 
 	render() {
@@ -23,6 +24,7 @@ export default class RegistrationPage extends Block<IRegistrationProps> {
 			fields: mockRegistrationData.fieldsDto.map(
 				(field) => new FormFieldBlock(field),
 			),
+			devModeNav: new DevModeNavBlock(),
 		};
 
 		return this.compile(Template, { title: 'Регистрация' });

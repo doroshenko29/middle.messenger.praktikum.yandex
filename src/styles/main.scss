@@ -170,6 +170,10 @@ input {
 	}
 }
 
+.form-field__error {
+	color: var(--error-color);
+}
+
 .profile {
 	margin: 15% auto;
 

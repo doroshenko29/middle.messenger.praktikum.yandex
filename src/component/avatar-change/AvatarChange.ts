@@ -3,7 +3,7 @@ import Template from './avatar-change.hbs?raw';
 
 export default class AvatarChangeBlock extends Block<IAvatarProps> {
 	constructor(protected props: IAvatarProps) {
-		super('div', { ...props, classNames: ['avatar-change'] });
+		super({ ...props, classNames: ['avatar-change'] }, 'div');
 	}
 
 	render() {

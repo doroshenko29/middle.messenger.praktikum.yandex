@@ -2,6 +2,7 @@ import { PAGE } from '../../App';
 import Block from '../../blocks/block';
 import ButtonBlock from '../../component/button/Button';
 import ChatBlock from '../../component/chat/Chat';
+import DevModeNavBlock from '../../component/DevModeNav/DevModeNav';
 import FormFieldBlock from '../../component/form-field/FormField';
 import LinkBlock from '../../component/link/Link';
 import MessageBlock from '../../component/message/Message';
@@ -10,7 +11,7 @@ import Template from './chat.hbs?raw';
 
 export default class ChatPage extends Block {
 	constructor() {
-		super('div', { classNames: ['page'] });
+		super({ classNames: ['page'] }, 'div');
 	}
 
 	render() {
@@ -31,6 +32,7 @@ export default class ChatPage extends Block {
 				text: '>',
 				classNames: ['button-send'],
 			}),
+			devModeNav: new DevModeNavBlock(),
 		};
 
 		return this.compile(Template, {});

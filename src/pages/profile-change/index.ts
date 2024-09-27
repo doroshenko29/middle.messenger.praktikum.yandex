@@ -1,13 +1,14 @@
 import Block from '../../blocks/block';
 import AvatarChangeBlock from '../../component/avatar-change/AvatarChange';
 import ButtonBlock from '../../component/button/Button';
+import DevModeNavBlock from '../../component/DevModeNav/DevModeNav';
 import FormFieldBlock from '../../component/form-field/FormField';
 import { mockProfileData } from '../../mocks';
 import Template from './profile-change.hbs?raw';
 
 export default class ProfileChangePage extends Block {
 	constructor() {
-		super('div', { classNames: ['page'] });
+		super({ classNames: ['page'] }, 'div');
 	}
 
 	render() {
@@ -21,6 +22,7 @@ export default class ProfileChangePage extends Block {
 			button: new ButtonBlock({
 				text: 'Сохранить',
 			}),
+			devModeNav: new DevModeNavBlock(),
 		};
 
 		return this.compile(Template, { ...this.props });

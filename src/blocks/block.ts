@@ -29,8 +29,8 @@ export default class Block<IProps extends IBlockProps = IBlockProps> {
 	_id: string | null = null;
 
 	constructor(
-		tagName = 'div',
 		propsAndChildren: Partial<IProps> & { children?: IChildren } = {},
+		tagName = 'div',
 	) {
 		const { children, props = {} } = this._getChildren(propsAndChildren);
 		this.children = children;

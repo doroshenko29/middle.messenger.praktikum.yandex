@@ -3,7 +3,7 @@ import Template from './chat.hbs?raw';
 
 export default class ChatBlock extends Block<IChatProps> {
 	constructor(protected props: IChatProps) {
-		super('div', props);
+		super(props, 'div');
 	}
 
 	render() {

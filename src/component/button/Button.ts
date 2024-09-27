@@ -3,7 +3,7 @@ import ButtonTemplate from './button.hbs?raw';
 
 export default class ButtonBlock extends Block<IButtonProps> {
 	constructor(protected props: IButtonProps) {
-		super('div', props);
+		super(props, 'div');
 	}
 
 	render() {

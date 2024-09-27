@@ -1,6 +1,7 @@
 import { PAGE } from '../../App';
 import Block from '../../blocks/block';
 import AvatarChangeBlock from '../../component/avatar-change/AvatarChange';
+import DevModeNavBlock from '../../component/DevModeNav/DevModeNav';
 import FormFieldBlock from '../../component/form-field/FormField';
 import LinkBlock from '../../component/link/Link';
 import { mockProfileData } from '../../mocks';
@@ -8,7 +9,7 @@ import Template from './profile.hbs?raw';
 
 export default class ProfilePage extends Block {
 	constructor() {
-		super('div', { classNames: ['page'] });
+		super({ classNames: ['page'] }, 'div');
 	}
 
 	render() {
@@ -34,6 +35,7 @@ export default class ProfilePage extends Block {
 			avatar: new AvatarChangeBlock({
 				value: '',
 			}),
+			devModeNav: new DevModeNavBlock(),
 		};
 
 		return this.compile(Template, { ...this.props });

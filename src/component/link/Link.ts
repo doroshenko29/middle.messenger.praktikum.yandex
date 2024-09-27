@@ -4,7 +4,7 @@ import Link from './link.hbs?raw';
 
 export default class LinkBlock extends Block<ILinkProps> {
 	constructor(protected props: ILinkProps) {
-		super('div', props);
+		super(props, 'div');
 	}
 
 	render() {

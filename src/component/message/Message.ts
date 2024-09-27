@@ -3,12 +3,15 @@ import Template from './message.hbs?raw';
 
 export default class MessageBlock extends Block<IMessageProps> {
 	constructor(protected props: IMessageProps) {
-		super('div', {
-			...props,
-			classNames: ['message', props.isMine ? 'mine' : null].filter(
-				Boolean,
-			) as string[],
-		});
+		super(
+			{
+				...props,
+				classNames: ['message', props.isMine ? 'mine' : null].filter(
+					Boolean,
+				) as string[],
+			},
+			'div',
+		);
 		const classNames = ['message'];
 		if (this.props.isMine) {
 			classNames.push('mine');

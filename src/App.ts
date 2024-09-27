@@ -2,14 +2,10 @@ import Handlebars from 'handlebars';
 import * as Pages from './pages';
 import BackLink from './partials/back-link.hbs?raw';
 import AuthForm from './partials/auth-form.hbs?raw';
-import DevModeNav from './partials/dev-mode-nav.hbs?raw';
-import Link from './partials/link.hbs?raw';
 import Block from './blocks/block';
 
 Handlebars.registerPartial('BackLink', BackLink);
 Handlebars.registerPartial('AuthForm', AuthForm);
-Handlebars.registerPartial('DevModeNav', DevModeNav);
-Handlebars.registerPartial('Link', Link);
 
 function renderBlock(root: HTMLElement, block: Block) {
 	root.appendChild(block.getContent()!);
@@ -19,7 +15,7 @@ function renderBlock(root: HTMLElement, block: Block) {
 
 export default class App {
 	protected state: IAppState = {
-		currentPage: PAGE.CHAT,
+		currentPage: PAGE.LOGIN,
 	};
 
 	protected readonly appElement = document.getElementById('app')!;
