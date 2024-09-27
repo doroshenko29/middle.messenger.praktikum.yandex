@@ -5,11 +5,8 @@ import Template from './DevModeNav.hbs?raw';
 
 export default class DevModeNavBlock extends Block {
 	constructor() {
-		super({ classNames: ['dev-mode-nav'] }, 'nav');
-	}
-
-	render() {
-		this.children = {
+		super({ 
+			classNames: ['dev-mode-nav'],
 			navigation: [
 				new NavLinkBlock({
 					dataPage: PAGE.LOGIN,
@@ -44,8 +41,10 @@ export default class DevModeNavBlock extends Block {
 					text: '404',
 				}),
 			],
-		};
+		},);
+	}
 
+	render() {
 		return this.compile(Template, { ...this.props });
 	}
 }

@@ -2,7 +2,7 @@ import Block, { IBlockProps } from '../../blocks/block';
 import Template from './Error.hbs?raw';
 
 export default class ErrorBlock extends Block<IErrorProps> {
-	constructor(protected props: IErrorProps) {
+	constructor(props: IErrorProps) {
 		super(props);
 	}
 
