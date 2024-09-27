@@ -15,7 +15,7 @@ export default class ChatPage extends Block {
 			LinkToProfile: new LinkBlock({
 				dataPage: PAGE.PROFILE,
 				text: 'Профиль',
-				classNames: ['link-to-profile'],
+				class: 'link-to-profile',
 			}),
 			Chats: chats.map((field) => new ChatBlock(field)),
 			CurrentChat: currentChat.map((el) => new MessageBlock(el)),
