@@ -5,7 +5,9 @@
         {{{LinkToProfile}}}
       </div>
       <div class="chat-page-chats-content">
-        {{{Chats}}}
+        {{#each Chats}}
+          {{{this}}}
+        {{/each}}
       </div>
     </section>
     <section class="chat-page-chat">
@@ -16,7 +18,9 @@
           </div>
       </div>
       <div class="chat-page-chat-messages">
-        {{{CurrentChat}}}
+        {{#each CurrentChat}}
+          {{{this}}}
+        {{/each}}
       </div>
       <div class="chat-page-chat-bottom">
         {{{MessageInputField}}}

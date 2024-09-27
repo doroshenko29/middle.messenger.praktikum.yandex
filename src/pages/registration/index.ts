@@ -1,9 +1,9 @@
-import { PAGE } from '../../App';
 import Block from '../../blocks/block';
 import ButtonBlock from '../../component/button/Button';
 import DevModeNavBlock from '../../component/DevModeNav/DevModeNav';
 import FormFieldBlock from '../../component/form-field/FormField';
 import LinkBlock from '../../component/link/Link';
+import PAGE from '../../constants/PAGE';
 import REGISTRATION_FIELDS_DTO from '../../constants/RegistrationFieldsDto';
 import Template from './registration.hbs?raw';
 

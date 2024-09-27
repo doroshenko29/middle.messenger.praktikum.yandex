@@ -1,5 +1,5 @@
-import { PAGE } from '../../App';
 import Block, { IBlockProps } from '../../blocks/block';
+import PAGE from '../../constants/PAGE';
 import Link from './link.hbs?raw';
 
 export default class LinkBlock extends Block<ILinkProps> {

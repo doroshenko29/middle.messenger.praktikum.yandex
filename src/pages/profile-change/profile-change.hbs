@@ -1,13 +1,17 @@
-<div class="page-wrapper">
-  {{> BackLink}}
-  <main class="profile">
-    <form class="profile__form">
-      {{{avatar}}}
-      <section>
-        {{{fields}}}
-      </section>
-      {{{button}}}
-    </form>
-  </main>
+<div class='page'>
+  <div class="page-wrapper">
+    {{> BackLink}}
+    <main class="profile">
+      <form class="profile__form">
+        {{{Avatar}}}
+        <section>
+          {{#each Fields}}
+            {{{this}}}
+          {{/each}}
+        </section>
+        {{{Button}}}
+      </form>
+    </main>
+  </div>
+  {{{DevModeNav}}}
 </div>
-{{{devModeNav}}}

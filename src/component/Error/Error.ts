@@ -1,16 +1,8 @@
-import Block, { IBlockProps } from '../../blocks/block';
+import Block from '../../blocks/block';
 import Template from './Error.hbs?raw';
 
-export default class ErrorBlock extends Block<IErrorProps> {
-	constructor(props: IErrorProps) {
-		super(props);
-	}
-
+export default class ErrorBlock extends Block {
 	render() {
 		return this.compile(Template, this.props);
 	}
-}
-
-export interface IErrorProps extends IBlockProps {
-	errorText?: string | null;
 }

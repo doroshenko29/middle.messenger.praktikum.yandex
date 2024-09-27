@@ -1,24 +1,23 @@
-import { PAGE } from '../../App';
 import Block, { IBlockProps } from '../../blocks/block';
 import DevModeNavBlock from '../../component/DevModeNav/DevModeNav';
 import LinkBlock from '../../component/link/Link';
+import PAGE from '../../constants/PAGE';
 import Template from './error.hbs?raw';
 
-export default class ErrorPage extends Block<IErrorPageProps> {
-	constructor(protected props: IErrorPageProps) {
-		super({ ...props, classNames: ['page'] }, 'div');
-	}
-
-	render() {
-		this.children = {
-			linkToChat: new LinkBlock({
+export default class ErrorPage extends Block {
+	constructor(props: IErrorPageProps) {
+		super({
+			...props,
+			LinkToChat: new LinkBlock({
 				dataPage: PAGE.CHAT,
 				text: 'Назад к чатам',
 			}),
-			devModeNav: new DevModeNavBlock(),
-		};
+			DevModeNav: new DevModeNavBlock(),
+		});
+	}
 
-		return this.compile(Template, { ...this.props });
+	render() {
+		return this.compile(Template, this.props);
 	}
 }
 

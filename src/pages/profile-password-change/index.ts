@@ -3,28 +3,26 @@ import AvatarChangeBlock from '../../component/avatar-change/AvatarChange';
 import ButtonBlock from '../../component/button/Button';
 import DevModeNavBlock from '../../component/DevModeNav/DevModeNav';
 import FormFieldBlock from '../../component/form-field/FormField';
-import { mockProfileData } from '../../mocks';
+import PROFILE_PASSWORD_CHANGE_DTO from '../../constants/ProfilePasswordChangeDto';
 import Template from './profile-password-change.hbs?raw';
 
 export default class ProfilePasswordChangePage extends Block {
 	constructor() {
-		super({ classNames: ['page'] }, 'div');
+		super({
+			Fields: PROFILE_PASSWORD_CHANGE_DTO.map(
+				(field) => new FormFieldBlock(field),
+			),
+			Avatar: new AvatarChangeBlock({
+				value: '',
+			}),
+			Button: new ButtonBlock({
+				text: 'Сохранить',
+			}),
+			DevModeNav: new DevModeNavBlock(),
+		});
 	}
 
 	render() {
-		this.children = {
-			fields: mockProfileData.password_fields.map(
-				(field) => new FormFieldBlock(field),
-			),
-			avatar: new AvatarChangeBlock({
-				value: '',
-			}),
-			button: new ButtonBlock({
-				text: 'Сохранить',
-			}),
-			devModeNav: new DevModeNavBlock(),
-		};
-
-		return this.compile(Template, { ...this.props });
+		return this.compile(Template, { name: 'Иван' });
 	}
 }

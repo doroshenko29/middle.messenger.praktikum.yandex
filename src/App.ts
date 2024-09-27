@@ -3,6 +3,7 @@ import * as Pages from './pages';
 import BackLink from './partials/back-link.hbs?raw';
 import AuthForm from './partials/auth-form.hbs?raw';
 import Block from './blocks/block';
+import PAGE from './constants/PAGE';
 
 Handlebars.registerPartial('BackLink', BackLink);
 Handlebars.registerPartial('AuthForm', AuthForm);
@@ -81,15 +82,4 @@ export default class App {
 
 interface IAppState {
 	currentPage: PAGE | keyof typeof PAGE;
-}
-
-export enum PAGE {
-	LOGIN = 'login',
-	REGISTRATION = 'registration',
-	CHAT = 'chat',
-	PROFILE = 'profile',
-	PROFILE_CHANGE = 'profile-change',
-	PROFILE_CHANGE_PASSWORD = 'profile-password-change',
-	ERROR = 'error-5**',
-	ERROR_NOT_FOUND = 'error-404',
 }

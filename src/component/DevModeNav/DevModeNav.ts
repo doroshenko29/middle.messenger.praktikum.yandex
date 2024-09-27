@@ -1,5 +1,5 @@
-import { PAGE } from '../../App';
 import Block from '../../blocks/block';
+import PAGE from '../../constants/PAGE';
 import NavLinkBlock from '../link/NavLink';
 import Template from './DevModeNav.hbs?raw';
 

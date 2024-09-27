@@ -1,4 +1,3 @@
-import { PAGE } from '../../App';
 import Block from '../../blocks/block';
 import ButtonBlock from '../../component/button/Button';
 import ChatBlock from '../../component/chat/Chat';
@@ -6,6 +5,7 @@ import DevModeNavBlock from '../../component/DevModeNav/DevModeNav';
 import FormFieldBlock from '../../component/form-field/FormField';
 import LinkBlock from '../../component/link/Link';
 import MessageBlock from '../../component/message/Message';
+import PAGE from '../../constants/PAGE';
 import { chats, currentChat } from '../../mocks';
 import Template from './chat.hbs?raw';
 

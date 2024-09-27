@@ -1,14 +1,20 @@
-<div class="page-wrapper prifile-page">
-  {{> BackLink}}
-  <main class="profile">
-    <form class="profile__form">
-      {{{avatar}}}
-      <h4>{{name}}</h4>
-      {{{fields}}}
-    </form>
-    <section>
-      {{{formLinks}}}
-    </section>
-  </main>
+<div class='page'>
+  <div class="page-wrapper prifile-page">
+    {{> BackLink}}
+    <main class="profile">
+      <form class="profile__form">
+        {{{Avatar}}}
+        <h4>{{name}}</h4>
+        {{#each Fields}}
+          {{{this}}}
+        {{/each}}
+      </form>
+      <section>
+        {{#each FormLinks}}
+          {{{this}}}
+        {{/each}}
+      </section>
+    </main>
+  </div>
+  {{{DevModeNav}}}
 </div>
-{{{devModeNav}}}

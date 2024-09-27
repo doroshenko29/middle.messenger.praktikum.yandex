@@ -1,10 +1,10 @@
-import { PAGE } from '../../App';
 import Block from '../../blocks/block';
 import ButtonBlock from '../../component/button/Button';
 import DevModeNavBlock from '../../component/DevModeNav/DevModeNav';
 import FormFieldBlock from '../../component/form-field/FormField';
 import LinkBlock from '../../component/link/Link';
 import LOGIN_FIELDS_DTO from '../../constants/LoginFieldsDto';
+import PAGE from '../../constants/PAGE';
 import Template from './login.hbs?raw';
 
 export default class LoginPage extends Block {
