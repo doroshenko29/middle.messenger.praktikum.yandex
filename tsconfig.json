@@ -13,8 +13,7 @@
 		"types": ["vite/client"],
 		"noEmit": true,
 		"skipLibCheck": true,
-		"esModuleInterop": true,
-		"moduleResolution": "node"
+		"esModuleInterop": true
 	},
 	"include": ["src/**/*.ts", "src/**/*.hbs"],
 	"exclude": ["node_modules", "dist"]

@@ -1,7 +1,7 @@
 import Handlebars from 'handlebars';
 import { v4 as makeUUID } from 'uuid';
-import EventBus from '../utils/event-bus';
-import NeedArray from '../utils/NeedArray';
+import EventBus from '../utils/eventBus';
+import NeedArray from '../utils/needArray';
 
 interface IChildren {
 	[key: string]: Block | Array<Block>;
