@@ -1,10 +1,10 @@
 import Block from '../../blocks/block';
-import ButtonBlock from '../../component/button/Button';
-import ChatBlock from '../../component/chat/Chat';
+import ButtonBlock from '../../component/button';
+import ChatBlock from '../../component/chat';
 import DevModeNav from '../../component/devModeNav';
-import FormFieldBlock from '../../component/FormField/FormField';
+import FormFieldBlock from '../../component/formField';
 import Link from '../../component/link';
-import MessageBlock from '../../component/message/Message';
+import MessageBlock from '../../component/message';
 import PAGE from '../../constants/PAGE';
 import { chats, currentChat } from '../../mocks';
 import LogFormData from '../../utils/LogFormData';

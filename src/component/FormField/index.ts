@@ -1,8 +1,8 @@
 import Block, { IBlockProps } from '../../blocks/block';
 import VALIDATOR from '../../constants/Validator';
-import ErrorBlock from '../Error/Error';
-import InputBlock from '../Input/Input';
-import LabelBlock from '../Label/Label';
+import ErrorBlock from '../error';
+import InputBlock from '../input';
+import LabelBlock from '../label';
 import FormFieldTemplate from './formField.hbs?raw';
 
 export default class FormFieldBlock extends Block {
