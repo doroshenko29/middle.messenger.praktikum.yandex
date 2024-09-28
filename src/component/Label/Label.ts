@@ -1,5 +1,5 @@
 import Block from '../../blocks/block';
-import Template from './Label.hbs?raw';
+import Template from './label.hbs?raw';
 
 export default class LabelBlock extends Block {
 	render() {

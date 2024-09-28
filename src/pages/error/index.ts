@@ -1,5 +1,5 @@
 import Block, { IBlockProps } from '../../blocks/block';
-import DevModeNavBlock from '../../component/DevModeNav/DevModeNav';
+import DevModeNav from '../../component/devModeNav';
 import Link from '../../component/link';
 import PAGE from '../../constants/PAGE';
 import Template from './error.hbs?raw';
@@ -12,7 +12,7 @@ export default class ErrorPage extends Block {
 				dataPage: PAGE.CHAT,
 				text: 'Назад к чатам',
 			}),
-			DevModeNav: new DevModeNavBlock(),
+			DevModeNav: new DevModeNav(),
 		});
 	}
 

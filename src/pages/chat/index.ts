@@ -1,7 +1,7 @@
 import Block from '../../blocks/block';
 import ButtonBlock from '../../component/button/Button';
 import ChatBlock from '../../component/chat/Chat';
-import DevModeNavBlock from '../../component/DevModeNav/DevModeNav';
+import DevModeNav from '../../component/devModeNav';
 import FormFieldBlock from '../../component/FormField/FormField';
 import Link from '../../component/link';
 import MessageBlock from '../../component/message/Message';
@@ -29,7 +29,7 @@ export default class ChatPage extends Block {
 				text: '>',
 				class: 'button-send',
 			}),
-			DevModeNav: new DevModeNavBlock(),
+			DevModeNav: new DevModeNav(),
 			events: {
 				submit: (event) => {
 					event.preventDefault();

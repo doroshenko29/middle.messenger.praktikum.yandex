@@ -1,5 +1,5 @@
 import Block, { IBlockProps } from '../../blocks/block';
-import Template from './Input.hbs?raw';
+import Template from './input.hbs?raw';
 
 class InputBlock extends Block {
 	constructor(props: IInputProps) {

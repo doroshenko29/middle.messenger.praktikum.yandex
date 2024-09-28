@@ -1,6 +1,6 @@
 import Block from '../../blocks/block';
 import ButtonBlock from '../../component/button/Button';
-import DevModeNavBlock from '../../component/DevModeNav/DevModeNav';
+import DevModeNav from '../../component/devModeNav';
 import FormFieldBlock from '../../component/FormField/FormField';
 import Link from '../../component/link';
 import LOGIN_FIELDS_DTO from '../../constants/LoginFieldsDto';
@@ -19,7 +19,7 @@ export default class LoginPage extends Block {
 				text: 'Авторизоваться',
 			}),
 			Fields: LOGIN_FIELDS_DTO.map((field) => new FormFieldBlock(field)),
-			DevModeNav: new DevModeNavBlock(),
+			DevModeNav: new DevModeNav(),
 			events: {
 				submit: (event) => {
 					event.preventDefault();

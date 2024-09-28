@@ -1,9 +1,9 @@
 import Block from '../../blocks/block';
 import PAGE from '../../constants/PAGE';
 import Link from '../link';
-import Template from './DevModeNav.hbs?raw';
+import Template from './devModeNav.hbs?raw';
 
-export default class DevModeNavBlock extends Block {
+export default class DevModeNav extends Block {
 	constructor() {
 		super({
 			navigation: [

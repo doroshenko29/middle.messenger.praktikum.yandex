@@ -1,5 +1,5 @@
 import Block from '../../blocks/block';
-import Template from './avatar-change.hbs?raw';
+import Template from './avatarChange.hbs?raw';
 
 export default class AvatarChangeBlock extends Block {
 	render() {

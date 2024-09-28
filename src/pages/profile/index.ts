@@ -1,6 +1,6 @@
 import Block from '../../blocks/block';
 import AvatarChangeBlock from '../../component/AvatarChange/AvatarChange';
-import DevModeNavBlock from '../../component/DevModeNav/DevModeNav';
+import DevModeNav from '../../component/devModeNav';
 import FormFieldBlock from '../../component/FormField/FormField';
 import Link from '../../component/link';
 import PROFILE_FIELDS_DTO from '../../constants/ProfileFieldsDto';
@@ -15,7 +15,7 @@ export default class ProfilePage extends Block {
 			}),
 			Fields: PROFILE_FIELDS_DTO.map((field) => new FormFieldBlock(field)),
 			FormLinks: PROFILE_LINKS_DTO.map((link) => new Link(link)),
-			DevModeNav: new DevModeNavBlock(),
+			DevModeNav: new DevModeNav(),
 		});
 	}
 
