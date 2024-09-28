@@ -1,16 +1,17 @@
 import Block from '../../blocks/block';
 import ButtonBlock from '../../component/button/Button';
 import DevModeNavBlock from '../../component/DevModeNav/DevModeNav';
-import FormFieldBlock from '../../component/form-field/FormField';
-import LinkBlock from '../../component/link/Link';
+import FormFieldBlock from '../../component/FormField/FormField';
+import Link from '../../component/Link/Link';
 import PAGE from '../../constants/PAGE';
 import REGISTRATION_FIELDS_DTO from '../../constants/RegistrationFieldsDto';
+import LogFormData from '../../utils/LogFormData';
 import Template from './registration.hbs?raw';
 
 export default class RegistrationPage extends Block {
 	constructor() {
 		super({
-			LinkToAuthorize: new LinkBlock({
+			LinkToAuthorize: new Link({
 				dataPage: PAGE.LOGIN,
 				text: 'Войти',
 			}),
@@ -19,6 +20,13 @@ export default class RegistrationPage extends Block {
 			}),
 			Fields: REGISTRATION_FIELDS_DTO.map((field) => new FormFieldBlock(field)),
 			DevModeNav: new DevModeNavBlock(),
+			events: {
+				submit: (event) => {
+					event.preventDefault();
+					const formData = new FormData(event.target as HTMLFormElement);
+					LogFormData(formData);
+				},
+			},
 		});
 	}
 

@@ -1,8 +1,8 @@
 import Block from '../../blocks/block';
-import Link from './link.hbs?raw';
+import Template from './link.hbs?raw';
 
-export default class LinkBlock extends Block {
+export default class Link extends Block {
 	render() {
-		return this.compile(Link, this.props);
+		return this.compile(Template, this.props);
 	}
 }

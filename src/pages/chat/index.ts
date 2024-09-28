@@ -2,17 +2,18 @@ import Block from '../../blocks/block';
 import ButtonBlock from '../../component/button/Button';
 import ChatBlock from '../../component/chat/Chat';
 import DevModeNavBlock from '../../component/DevModeNav/DevModeNav';
-import FormFieldBlock from '../../component/form-field/FormField';
-import LinkBlock from '../../component/link/Link';
+import FormFieldBlock from '../../component/FormField/FormField';
+import Link from '../../component/Link/Link';
 import MessageBlock from '../../component/message/Message';
 import PAGE from '../../constants/PAGE';
 import { chats, currentChat } from '../../mocks';
+import LogFormData from '../../utils/LogFormData';
 import Template from './chat.hbs?raw';
 
 export default class ChatPage extends Block {
 	constructor() {
 		super({
-			LinkToProfile: new LinkBlock({
+			LinkToProfile: new Link({
 				dataPage: PAGE.PROFILE,
 				text: 'Профиль',
 				class: 'link-to-profile',
@@ -29,6 +30,13 @@ export default class ChatPage extends Block {
 				class: 'button-send',
 			}),
 			DevModeNav: new DevModeNavBlock(),
+			events: {
+				submit: (event) => {
+					event.preventDefault();
+					const formData = new FormData(event.target as HTMLFormElement);
+					LogFormData(formData);
+				},
+			},
 		});
 	}
 

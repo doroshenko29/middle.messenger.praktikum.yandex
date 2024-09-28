@@ -1,6 +1,6 @@
 import Block, { IBlockProps } from '../../blocks/block';
 import DevModeNavBlock from '../../component/DevModeNav/DevModeNav';
-import LinkBlock from '../../component/link/Link';
+import Link from '../../component/Link/Link';
 import PAGE from '../../constants/PAGE';
 import Template from './error.hbs?raw';
 
@@ -8,7 +8,7 @@ export default class ErrorPage extends Block {
 	constructor(props: IErrorPageProps) {
 		super({
 			...props,
-			LinkToChat: new LinkBlock({
+			LinkToChat: new Link({
 				dataPage: PAGE.CHAT,
 				text: 'Назад к чатам',
 			}),

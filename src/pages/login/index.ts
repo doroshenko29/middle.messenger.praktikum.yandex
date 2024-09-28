@@ -1,16 +1,17 @@
 import Block from '../../blocks/block';
 import ButtonBlock from '../../component/button/Button';
 import DevModeNavBlock from '../../component/DevModeNav/DevModeNav';
-import FormFieldBlock from '../../component/form-field/FormField';
-import LinkBlock from '../../component/link/Link';
+import FormFieldBlock from '../../component/FormField/FormField';
+import Link from '../../component/Link/Link';
 import LOGIN_FIELDS_DTO from '../../constants/LoginFieldsDto';
 import PAGE from '../../constants/PAGE';
+import LogFormData from '../../utils/LogFormData';
 import Template from './login.hbs?raw';
 
 export default class LoginPage extends Block {
 	constructor() {
 		super({
-			LinkToRegistration: new LinkBlock({
+			LinkToRegistration: new Link({
 				dataPage: PAGE.REGISTRATION,
 				text: 'Нет аккаунта?',
 			}),
@@ -23,8 +24,7 @@ export default class LoginPage extends Block {
 				submit: (event) => {
 					event.preventDefault();
 					const formData = new FormData(event.target as HTMLFormElement);
-					// работает. Далее по ТЗ
-					console.log(formData.get('login'));
+					LogFormData(formData);
 				},
 			},
 		});

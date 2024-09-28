@@ -5,6 +5,11 @@
 	"engines": {
 		"node": ">=18"
 	},
+	"targets": {
+		"default": {
+			"includeNodeModules": true
+		}
+	},
 	"scripts": {
 		"start": "vite build && node server.cjs",
 		"build": "vite build",
