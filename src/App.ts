@@ -1,9 +1,15 @@
 import Handlebars from 'handlebars';
-import * as Pages from './pages';
 import BackLink from './partials/back-link.hbs?raw';
 import AuthForm from './partials/auth-form.hbs?raw';
 import Block from './blocks/block';
 import PAGE from './constants/PAGE';
+import ChatPage from './pages/chat';
+import ErrorPage from './pages/Error';
+import LoginPage from './pages/Login';
+import ProfilePage from './pages/Profile';
+import ProfileChangePage from './pages/profileChange';
+import ProfilePasswordChangePage from './pages/profilePasswordChange';
+import RegistrationPage from './pages/Registration';
 
 Handlebars.registerPartial('BackLink', BackLink);
 Handlebars.registerPartial('AuthForm', AuthForm);
@@ -25,32 +31,32 @@ export default class App {
 		const page: Block = (() => {
 			switch (this.state.currentPage) {
 				case PAGE.LOGIN: {
-					return new Pages.LoginPage();
+					return new LoginPage();
 				}
 				case PAGE.REGISTRATION: {
-					return new Pages.RegistrationPage();
+					return new RegistrationPage();
 				}
 				case PAGE.CHAT: {
-					return new Pages.ChatPage();
+					return new ChatPage();
 				}
 				case PAGE.PROFILE: {
-					return new Pages.ProfilePage();
+					return new ProfilePage();
 				}
 				case PAGE.PROFILE_CHANGE: {
-					return new Pages.ProfileChangePage();
+					return new ProfileChangePage();
 				}
 				case PAGE.PROFILE_CHANGE_PASSWORD: {
-					return new Pages.ProfilePasswordChangePage();
+					return new ProfilePasswordChangePage();
 				}
 				case PAGE.ERROR: {
-					return new Pages.ErrorPage({
+					return new ErrorPage({
 						errorCode: '500',
 						errorText: 'Мы уже фиксим',
 					});
 				}
 				case PAGE.ERROR_NOT_FOUND:
 				default: {
-					return new Pages.ErrorPage({
+					return new ErrorPage({
 						errorCode: '404',
 						errorText: 'Не туда попали',
 					});
