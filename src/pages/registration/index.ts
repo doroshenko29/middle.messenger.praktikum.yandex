@@ -2,7 +2,7 @@ import Block from '../../blocks/block';
 import ButtonBlock from '../../component/button/Button';
 import DevModeNavBlock from '../../component/DevModeNav/DevModeNav';
 import FormFieldBlock from '../../component/FormField/FormField';
-import Link from '../../component/Link';
+import Link from '../../component/link';
 import PAGE from '../../constants/PAGE';
 import REGISTRATION_FIELDS_DTO from '../../constants/RegistrationFieldsDto';
 import LogFormData from '../../utils/LogFormData';

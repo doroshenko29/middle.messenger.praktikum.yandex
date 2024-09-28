@@ -1,6 +1,6 @@
 import Block from '../../blocks/block';
 import PAGE from '../../constants/PAGE';
-import Link from '../Link';
+import Link from '../link';
 import Template from './DevModeNav.hbs?raw';
 
 export default class DevModeNavBlock extends Block {

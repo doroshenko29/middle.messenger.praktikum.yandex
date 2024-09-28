@@ -1,5 +1,5 @@
 import Block from '../../blocks/block';
-import Template from './Link.hbs?raw';
+import Template from './link.hbs?raw';
 
 export default class Link extends Block {
 	render() {
