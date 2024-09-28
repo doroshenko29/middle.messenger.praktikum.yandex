@@ -1,13 +1,13 @@
 import Block from '../../blocks/block';
 import ButtonBlock from '../../component/button';
 import ChatBlock from '../../component/chat';
-import DevModeNav from '../../component/dev';
-import FormFieldBlock from '../../component/fo';
+import DevModeNav from '../../component/devModeNav';
+import FormFieldBlock from '../../component/formField';
 import Link from '../../component/link';
 import MessageBlock from '../../component/message';
 import PAGE from '../../constants/PAGE';
 import { chats, currentChat } from '../../mocks';
-import LogFormData from '../../utils/LogFormData';
+import LogFormData from '../../utils/logFormData';
 import Template from './chat.hbs?raw';
 
 export default class ChatPage extends Block {

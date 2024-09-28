@@ -1,11 +1,11 @@
 import Block from '../../blocks/block';
 import ButtonBlock from '../../component/button';
-import DevModeNav from '../../component/dev';
-import FormFieldBlock from '../../component/fo';
+import DevModeNav from '../../component/devModeNav';
+import FormFieldBlock from '../../component/formField';
 import Link from '../../component/link';
 import LOGIN_FIELDS_DTO from '../../constants/LoginFieldsDto';
 import PAGE from '../../constants/PAGE';
-import LogFormData from '../../utils/LogFormData';
+import LogFormData from '../../utils/logFormData';
 import Template from './login.hbs?raw';
 
 export default class LoginPage extends Block {

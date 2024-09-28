@@ -1,11 +1,11 @@
 import Block from '../../blocks/block';
 import ButtonBlock from '../../component/button';
-import DevModeNav from '../../component/dev';
-import FormFieldBlock from '../../component/fo';
+import DevModeNav from '../../component/devModeNav';
+import FormFieldBlock from '../../component/formField';
 import Link from '../../component/link';
 import PAGE from '../../constants/PAGE';
 import REGISTRATION_FIELDS_DTO from '../../constants/RegistrationFieldsDto';
-import LogFormData from '../../utils/LogFormData';
+import LogFormData from '../../utils/logFormData';
 import Template from './registration.hbs?raw';
 
 export default class RegistrationPage extends Block {

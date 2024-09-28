@@ -1,10 +1,10 @@
 import Block from '../../blocks/block';
-import AvatarChangeBlock from '../../component/Av';
+import AvatarChangeBlock from '../../component/avatarChange';
 import ButtonBlock from '../../component/button';
-import DevModeNav from '../../component/dev';
-import FormFieldBlock from '../../component/fo';
+import DevModeNav from '../../component/devModeNav';
+import FormFieldBlock from '../../component/formField';
 import PROFILE_PASSWORD_CHANGE_DTO from '../../constants/ProfilePasswordChangeDto';
-import LogFormData from '../../utils/LogFormData';
+import LogFormData from '../../utils/logFormData';
 import Template from './profilePasswordChange.hbs?raw';
 
 export default class ProfilePasswordChangePage extends Block {
