@@ -3,7 +3,7 @@ import ButtonBlock from '../../component/button/Button';
 import ChatBlock from '../../component/chat/Chat';
 import DevModeNavBlock from '../../component/DevModeNav/DevModeNav';
 import FormFieldBlock from '../../component/FormField/FormField';
-import Link from '../../component/link/Link';
+import Link from '../../component/link';
 import MessageBlock from '../../component/message/Message';
 import PAGE from '../../constants/PAGE';
 import { chats, currentChat } from '../../mocks';

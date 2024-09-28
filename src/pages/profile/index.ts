@@ -2,7 +2,7 @@ import Block from '../../blocks/block';
 import AvatarChangeBlock from '../../component/AvatarChange/AvatarChange';
 import DevModeNavBlock from '../../component/DevModeNav/DevModeNav';
 import FormFieldBlock from '../../component/FormField/FormField';
-import Link from '../../component/link/Link';
+import Link from '../../component/link';
 import PROFILE_FIELDS_DTO from '../../constants/ProfileFieldsDto';
 import PROFILE_LINKS_DTO from '../../constants/ProfileLinksDto';
 import Template from './profile.hbs?raw';

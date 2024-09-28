@@ -1,6 +1,6 @@
 import Block, { IBlockProps } from '../../blocks/block';
 import DevModeNavBlock from '../../component/DevModeNav/DevModeNav';
-import Link from '../../component/link/Link';
+import Link from '../../component/link';
 import PAGE from '../../constants/PAGE';
 import Template from './error.hbs?raw';
 
