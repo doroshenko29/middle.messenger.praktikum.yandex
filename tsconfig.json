@@ -1,9 +1,9 @@
 {
 	"compilerOptions": {
 		"outDir": "dist",
-		"target": "ESNext",
+		"target": "es2016",
 		"declaration": false,
-		"module": "NodeNext",
+		"module": "commonjs",
 		"strictNullChecks": true,
 		"sourceMap": true,
 		"noImplicitAny": true,
@@ -14,8 +14,7 @@
 		"noEmit": true,
 		"skipLibCheck": true,
 		"esModuleInterop": true,
-		"moduleResolution": "Node16",
-		"forceConsistentCasingInFileNames": true
+		"moduleResolution": "node"
 	},
 	"include": ["src", "src/**/*.hbs"],
 	"exclude": ["node_modules", "dist"]
