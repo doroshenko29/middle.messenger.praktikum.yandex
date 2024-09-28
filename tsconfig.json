@@ -9,12 +9,14 @@
 		"noImplicitAny": true,
 		"noUnusedLocals": true,
 		"noUnusedParameters": true,
-		"lib": ["dom", "es2017"],
+		"lib": ["dom", "es6"],
 		"types": ["vite/client"],
 		"noEmit": true,
 		"skipLibCheck": true,
 		"esModuleInterop": true,
-		"moduleResolution": "node"
+		"moduleResolution": "node",
+		"allowSyntheticDefaultImports": true,
+		"isolatedModules": true
 	},
 	"include": ["src", "src/**/*.hbs"],
 	"exclude": ["node_modules", "dist"]
