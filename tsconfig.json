@@ -2,21 +2,19 @@
 	"compilerOptions": {
 		"outDir": "dist",
 		"target": "es2016",
-		"declaration": false,
+		"declaration": true,
 		"module": "commonjs",
 		"strictNullChecks": true,
 		"sourceMap": true,
 		"noImplicitAny": true,
 		"noUnusedLocals": true,
 		"noUnusedParameters": true,
-		"lib": ["dom", "es6"],
+		"lib": ["dom", "es2017"],
 		"types": ["vite/client"],
 		"noEmit": true,
 		"skipLibCheck": true,
 		"esModuleInterop": true,
-		"moduleResolution": "node",
-		"allowSyntheticDefaultImports": true,
-		"isolatedModules": true
+		"moduleResolution": "node"
 	},
 	"include": ["src", "src/**/*.hbs"],
 	"exclude": ["node_modules", "dist"]
