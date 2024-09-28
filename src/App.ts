@@ -4,12 +4,12 @@ import AuthForm from './partials/auth-form.hbs?raw';
 import Block from './blocks/block';
 import PAGE from './constants/PAGE';
 import ChatPage from './pages/chat';
-import ErrorPage from './pages/Error';
-import LoginPage from './pages/Login';
-import ProfilePage from './pages/Profile';
+import ErrorPage from './pages/error';
+import LoginPage from './pages/login';
+import ProfilePage from './pages/profile';
 import ProfileChangePage from './pages/profileChange';
 import ProfilePasswordChangePage from './pages/profilePasswordChange';
-import RegistrationPage from './pages/Registration';
+import RegistrationPage from './pages/registration';
 
 Handlebars.registerPartial('BackLink', BackLink);
 Handlebars.registerPartial('AuthForm', AuthForm);
