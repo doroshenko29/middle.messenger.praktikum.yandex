@@ -1,11 +1,32 @@
-<div class="page">
-  <div class="chat-page">
-    <div class="chat-page__chats">
-      <a href="/profile">Профиль</a>
-    </div>
-    <div class="chat-page__chat">
-      
-    </div>
-  </div>
+<div class='page'>
+	<main class='page-wrapper chat-page'>
+		<section class='chat-page-chats'>
+			<div class='chat-page-chats-header'>
+				{{{LinkToProfile}}}
+			</div>
+			<div class='chat-page-chats-content'>
+				{{#each Chats}}
+					{{{this}}}
+				{{/each}}
+			</div>
+		</section>
+		<section class='chat-page-chat'>
+			<div class='chat-page-chat-header chat'>
+				<div class='chat-avatar'></div>
+				<div class='chat-info'>
+					<div class='chat-info-name'>Андрей</div>
+				</div>
+			</div>
+			<div class='chat-page-chat-messages'>
+				{{#each CurrentChat}}
+					{{{this}}}
+				{{/each}}
+			</div>
+			<form class='chat-page-chat-bottom'>
+				{{{MessageInputField}}}
+				{{{ButtonSubmit}}}
+			</form>
+		</section>
+	</main>
+	{{{DevModeNav}}}
 </div>
-{{> DevModeNav}}

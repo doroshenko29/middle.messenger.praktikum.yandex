@@ -1,0 +1,20 @@
+{
+	"compilerOptions": {
+		"outDir": "dist",
+		"target": "es2016",
+		"declaration": false,
+		"module": "commonjs",
+		"strictNullChecks": true,
+		"sourceMap": true,
+		"noImplicitAny": true,
+		"noUnusedLocals": true,
+		"noUnusedParameters": true,
+		"lib": ["dom", "es2017"],
+		"types": ["vite/client"],
+		"noEmit": true,
+		"skipLibCheck": true,
+		"esModuleInterop": true
+	},
+	"include": ["src/**/*.ts", "src/**/*.hbs"],
+	"exclude": ["node_modules", "dist"]
+}
