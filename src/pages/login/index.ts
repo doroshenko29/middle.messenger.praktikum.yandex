@@ -1,7 +1,7 @@
 import Block from '../../blocks/block';
-import ButtonBlock from '../../component/button';
+import Button from '../../component/button';
 import DevModeNav from '../../component/devModeNav';
-import FormFieldBlock from '../../component/formField';
+import FormField from '../../component/formField';
 import Link from '../../component/link';
 import LOGIN_FIELDS_DTO from '../../constants/LoginFieldsDto';
 import PAGE from '../../constants/PAGE';
@@ -15,10 +15,10 @@ export default class LoginPage extends Block {
 				dataPage: PAGE.REGISTRATION,
 				text: 'Нет аккаунта?',
 			}),
-			ButtonSubmit: new ButtonBlock({
+			ButtonSubmit: new Button({
 				text: 'Авторизоваться',
 			}),
-			Fields: LOGIN_FIELDS_DTO.map((field) => new FormFieldBlock(field)),
+			Fields: LOGIN_FIELDS_DTO.map((field) => new FormField(field)),
 			DevModeNav: new DevModeNav(),
 			events: {
 				submit: (event) => {

@@ -1,7 +1,7 @@
 import Block, { IBlockProps } from '../../blocks/block';
 import Template from './message.hbs?raw';
 
-export default class MessageBlock extends Block {
+export default class Message extends Block<IMessageProps> {
 	constructor(props: IMessageProps) {
 		super({
 			...props,

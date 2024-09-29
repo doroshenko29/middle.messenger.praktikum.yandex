@@ -1,8 +1,12 @@
-import Block from '../../blocks/block';
+import Block, { IBlockProps } from '../../blocks/block';
 import Template from './avatarChange.hbs?raw';
 
-export default class AvatarChangeBlock extends Block {
+export default class AvatarChange extends Block<IAvatarChangeProps> {
 	render() {
 		return this.compile(Template, { ...this.props });
 	}
+}
+
+interface IAvatarChangeProps extends IBlockProps {
+	value: string;
 }

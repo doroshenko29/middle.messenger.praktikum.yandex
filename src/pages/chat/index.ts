@@ -1,10 +1,10 @@
 import Block from '../../blocks/block';
-import ButtonBlock from '../../component/button';
-import ChatBlock from '../../component/chat';
+import Button from '../../component/button';
+import Chat from '../../component/chat';
 import DevModeNav from '../../component/devModeNav';
-import FormFieldBlock from '../../component/formField';
+import FormField from '../../component/formField';
 import Link from '../../component/link';
-import MessageBlock from '../../component/message';
+import Message from '../../component/message';
 import PAGE from '../../constants/PAGE';
 import { chats, currentChat } from '../../mocks';
 import LogFormData from '../../utils/logFormData';
@@ -18,14 +18,14 @@ export default class ChatPage extends Block {
 				text: 'Профиль',
 				class: 'link-to-profile',
 			}),
-			Chats: chats.map((field) => new ChatBlock(field)),
-			CurrentChat: currentChat.map((el) => new MessageBlock(el)),
-			MessageInputField: new FormFieldBlock({
+			Chats: chats.map((field) => new Chat(field)),
+			CurrentChat: currentChat.map((el) => new Message(el)),
+			MessageInputField: new FormField({
 				class: 'message-field-wrapper',
 				name: 'message',
 				type: 'text',
 			}),
-			ButtonSubmit: new ButtonBlock({
+			ButtonSubmit: new Button({
 				text: '>',
 				class: 'button-send',
 			}),

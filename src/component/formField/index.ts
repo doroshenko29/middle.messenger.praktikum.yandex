@@ -1,26 +1,26 @@
 import Block, { IBlockProps } from '../../blocks/block';
 import VALIDATOR from '../../constants/Validator';
-import ErrorBlock from '../error';
-import InputBlock from '../input';
-import LabelBlock from '../label';
+import Error from '../error';
+import Input from '../input';
+import Label from '../label';
 import FormFieldTemplate from './formField.hbs?raw';
 
-export default class FormFieldBlock extends Block {
+export default class FormField extends Block<IFormFieldProps> {
 	constructor(props: IFormFieldProps) {
 		super({
 			...props,
-			Label: new LabelBlock({
+			Label: new Label({
 				...props,
 			}),
-			Input: new InputBlock({
+			Input: new Input({
 				...props,
 				OnBlur: (value) => {
-					(this.children.ErrorMessage as Block).setProps({
+					(this.children.ErrorMessage as Error).setProps({
 						errorText: this.validatorCallback(VALIDATOR[props.name], value),
 					});
 				},
 			}),
-			ErrorMessage: new ErrorBlock({}),
+			ErrorMessage: new Error({}),
 		});
 	}
 
@@ -45,5 +45,6 @@ export interface IFormFieldProps extends IBlockProps {
 	name: string;
 	type: string;
 	value?: string | number;
+	class?: string;
 	validatorCallback?: (value?: string | number) => string | null;
 }
