@@ -8,16 +8,16 @@ interface IChildren {
 }
 
 export interface IBlockProps {
-	events?: Record<string, EventListener | undefined>;
+	events?: Record<string, EventListener>;
 	[key: string]: unknown;
 }
 
-abstract class Block {
+abstract class Block<Props extends IBlockProps = Record<string, unknown>> {
 	protected eventBus: () => EventBus;
 
 	protected children: IChildren;
 
-	protected props: IBlockProps;
+	protected props: Props;
 
 	static EVENTS = {
 		INIT: 'init',
@@ -30,7 +30,7 @@ abstract class Block {
 
 	protected id: string | null = null;
 
-	constructor(propsWithChildren: IBlockProps = {}) {
+	constructor(propsWithChildren: IBlockProps = Object.create({})) {
 		const { children, props } = this._getChildrenAndProps(propsWithChildren);
 		this.children = children;
 
@@ -122,7 +122,7 @@ abstract class Block {
 		return oldProps !== newProps;
 	}
 
-	setProps = (nextProps: IBlockProps) => {
+	setProps = (nextProps: Props) => {
 		if (!nextProps) {
 			return;
 		}
@@ -158,10 +158,10 @@ abstract class Block {
 		return this.element;
 	}
 
-	protected _makePropsProxy(props: IBlockProps) {
-		return new Proxy<IBlockProps>(props, {
+	protected _makePropsProxy(props: Props) {
+		return new Proxy<Props>(props, {
 			get: (target, prop) => {
-				const value = target[prop as keyof IBlockProps];
+				const value = target[prop as keyof Props];
 				return typeof value === 'function' ? value.bind(target) : value;
 			},
 			set: (target, prop, value) => {
