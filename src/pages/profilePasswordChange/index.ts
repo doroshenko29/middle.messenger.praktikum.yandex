@@ -1,5 +1,6 @@
 import Block from '../../blocks/block';
 import AvatarChange from '../../component/avatarChange';
+import BackLink from '../../component/backLink';
 import Button from '../../component/button';
 import DevModeNav from '../../component/devModeNav';
 import FormField from '../../component/formField';
@@ -19,6 +20,7 @@ export default class ProfilePasswordChangePage extends Block {
 			Button: new Button({
 				text: 'Сохранить',
 			}),
+			BackLink: new BackLink(),
 			DevModeNav: new DevModeNav(),
 			events: {
 				submit: (event) => {

@@ -17,9 +17,17 @@
 		"import/no-unresolved": "off",
 		"no-use-before-define": "off",
 		"no-underscore-dangle": "off",
+		"no-constructor-return": "off",
 		"no-unused-vars": "off",
 		"@typescript-eslint/no-unused-vars": "error",
 		"import/no-extraneous-dependencies": "off",
-		"no-shadow": "off"
+		"no-shadow": "off",
+		"no-restricted-syntax": [
+            "error",
+            {
+                "selector": "CallExpression[callee.name='setTimeout'][arguments.length!=2]",
+                "message": "setTimeout must always be invoked with two arguments."
+            }
+        ]
 	}
 }

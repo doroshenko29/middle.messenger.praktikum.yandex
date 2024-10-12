@@ -175,12 +175,12 @@ abstract class Block<Props extends IBlockProps = Record<string, unknown>> {
 		});
 	}
 
-	show() {
-		this.getContent()!.style.display = 'block';
+	show(root: HTMLElement) {
+		root.appendChild(this.getContent()!);
 	}
 
-	hide() {
-		this.getContent()!.style.display = 'none';
+	hide(root: HTMLElement) {
+		root.removeChild(this.getContent()!)
 	}
 
 	compile(_template: string, props: IBlockProps) {
