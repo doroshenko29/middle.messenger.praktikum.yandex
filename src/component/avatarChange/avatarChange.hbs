@@ -1,4 +1,7 @@
-<div class='avatar-change'>
-	<span class='avatar-change__placeholder'>Поменять аватар</span>
-	<input type='file' name='avatar' value={{value}} />
+<div>
+	{{{ModalUploadImage}}}
+	<div class='avatar-change' style="background-image: url('{{value}}')">
+		<span class='avatar-change__placeholder'>Поменять аватар</span>
+		<input type='file' name='avatar' value={{value}} />
+	</div>
 </div>

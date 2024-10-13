@@ -6,6 +6,14 @@ import Label from '../label';
 import FormFieldTemplate from './formField.hbs?raw';
 
 export default class FormField extends Block<IFormFieldProps> {
+	protected isTouched = false;
+	
+	public IsValid = true;
+
+	public get IsTouchedAndValid() {
+		return this.isTouched && this.IsValid;
+	}
+
 	constructor(props: IFormFieldProps) {
 		super({
 			...props,
@@ -15,8 +23,11 @@ export default class FormField extends Block<IFormFieldProps> {
 			Input: new Input({
 				...props,
 				OnBlur: (value) => {
+					this.isTouched = true;
+					const errorText = this.validatorCallback(VALIDATOR[props.name], value);
+					this.IsValid = errorText == null;
 					(this.children.ErrorMessage as Error).setProps({
-						errorText: this.validatorCallback(VALIDATOR[props.name], value),
+						errorText,
 					});
 				},
 			}),

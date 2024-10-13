@@ -7,8 +7,9 @@ import Link from '../../component/link';
 import PROFILE_FIELDS_DTO from '../../constants/ProfileFieldsDto';
 import PROFILE_LINKS_DTO from '../../constants/ProfileLinksDto';
 import Template from './profile.hbs?raw';
+import connectToUser from '../../connectors/connectToUser';
 
-export default class ProfilePage extends Block {
+class ProfilePage extends Block {
 	constructor() {
 		super({
 			Avatar: new AvatarChange({
@@ -25,3 +26,5 @@ export default class ProfilePage extends Block {
 		return this.compile(Template, this.props);
 	}
 }
+
+export default connectToUser(ProfilePage);

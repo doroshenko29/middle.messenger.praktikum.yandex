@@ -15,9 +15,9 @@ export interface IBlockProps {
 abstract class Block<Props extends IBlockProps = Record<string, unknown>> {
 	protected eventBus: () => EventBus;
 
-	protected children: IChildren;
+	children: IChildren;
 
-	protected props: Props;
+	props: Props;
 
 	static EVENTS = {
 		INIT: 'init',
@@ -228,6 +228,8 @@ abstract class Block<Props extends IBlockProps = Record<string, unknown>> {
 
 		return fragment.content;
 	}
+
+	protected updateFields(_args?: unknown) {throw new Error('Method not allowed')}
 }
 
 export default Block;

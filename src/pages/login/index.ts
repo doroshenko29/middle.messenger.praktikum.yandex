@@ -5,10 +5,16 @@ import FormField from '../../component/formField';
 import Link from '../../component/link';
 import LOGIN_FIELDS_DTO from '../../constants/LoginFieldsDto';
 import PAGE from '../../constants/PAGE';
-import LogFormData from '../../utils/logFormData';
+import AuthController from '../../controllers/authController';
+import GetObjectFormData from '../../utils/getObjectFormData';
+import NeedArray from '../../utils/needArray';
 import Template from './login.hbs?raw';
 
 export default class LoginPage extends Block {
+	protected get isFormValid() {
+		return NeedArray(this.children.Fields as FormField[]).every(field => field.IsTouchedAndValid)
+	}
+	
 	constructor() {
 		super({
 			LinkToRegistration: new Link({
@@ -21,10 +27,12 @@ export default class LoginPage extends Block {
 			Fields: LOGIN_FIELDS_DTO.map((field) => new FormField(field)),
 			DevModeNav: new DevModeNav(),
 			events: {
-				submit: (event) => {
+				submit: async (event) => {
 					event.preventDefault();
-					const formData = new FormData(event.target as HTMLFormElement);
-					LogFormData(formData);
+					if(!this.isFormValid) {
+						return;
+					}
+					await AuthController.SignIn(GetObjectFormData(new FormData(event.target as HTMLFormElement)));
 				},
 			},
 		});

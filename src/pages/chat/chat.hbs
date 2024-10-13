@@ -1,32 +1,7 @@
 <div class='page'>
 	<main class='page-wrapper chat-page'>
-		<section class='chat-page__chats'>
-			<div class='chat-page__chats__header'>
-				{{{LinkToProfile}}}
-			</div>
-			<div class='chat-page__chats__content'>
-				{{#each Chats}}
-					{{{this}}}
-				{{/each}}
-			</div>
-		</section>
-		<section class='chat-page__chat'>
-			<div class='chat-page__chat__header chat'>
-				<div class='chat__avatar'></div>
-				<div class='chat__info'>
-					<div class='chat__info__name'>Андрей</div>
-				</div>
-			</div>
-			<div class='chat-page__chat__messages'>
-				{{#each CurrentChat}}
-					{{{this}}}
-				{{/each}}
-			</div>
-			<form class='chat-page__chat__bottom'>
-				{{{MessageInputField}}}
-				{{{ButtonSubmit}}}
-			</form>
-		</section>
+		{{{ChatAside}}}
+		{{{ChatSpace}}}
 	</main>
 	{{{DevModeNav}}}
 </div>

@@ -1,0 +1,28 @@
+{{#if chatId}}
+    <section class='chat-page__chat'>
+        {{{ModalAddUser}}}
+        {{{ModalRemoveUser}}}
+        <div class='chat-page__chat__header chat'>
+            <div class='chat__avatar'></div>
+            <div class='chat__info'>
+                <div class='chat__info__name'>{{title}}</div>
+            </div>
+            {{{AddUser}}}
+            {{{RemoveUser}}}
+            {{{RemoveChat}}}
+        </div>
+        <div class='chat-page__chat__messages'>
+            {{#each CurrentChat}}
+                {{{this}}}
+            {{/each}}
+        </div>
+        <form class='chat-page__chat__bottom'>
+            {{{MessageInputField}}}
+            {{{ButtonSubmit}}}
+        </form>
+    </section>
+{{else}}
+    <div class='chat-page__empty-chat'>
+        Выберите чат чтобы отправить сообщение
+    </div>
+{{/if}}

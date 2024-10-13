@@ -5,10 +5,17 @@ import Button from '../../component/button';
 import DevModeNav from '../../component/devModeNav';
 import FormField from '../../component/formField';
 import PROFILE_FIELDS_DTO from '../../constants/ProfileFieldsDto';
-import LogFormData from '../../utils/logFormData';
 import Template from './profileChange.hbs?raw';
+import UserInfoController from '../../controllers/userInfoController';
+import NeedArray from '../../utils/needArray';
+import GetObjectFormData from '../../utils/getObjectFormData';
+import connectToUser from '../../connectors/connectToUser';
 
-export default class ProfileChangePage extends Block {
+class ProfileChangePage extends Block {
+	protected get isFormValid() {
+		return NeedArray(this.children.Fields as FormField[]).every(field => field.IsValid)
+	}
+
 	constructor() {
 		super({
 			Fields: PROFILE_FIELDS_DTO.map((field) => new FormField(field)),
@@ -21,10 +28,12 @@ export default class ProfileChangePage extends Block {
 			BackLink: new BackLink(),
 			DevModeNav: new DevModeNav(),
 			events: {
-				submit: (event) => {
+				submit: async (event) => {
 					event.preventDefault();
-					const formData = new FormData(event.target as HTMLFormElement);
-					LogFormData(formData);
+					if(!this.isFormValid) {
+						return;
+					}
+					await UserInfoController.UpdateUserInfo(GetObjectFormData(new FormData(event.target as HTMLFormElement)));
 				},
 			},
 		});
@@ -34,3 +43,5 @@ export default class ProfileChangePage extends Block {
 		return this.compile(Template, this.props);
 	}
 }
+
+export default connectToUser(ProfileChangePage);

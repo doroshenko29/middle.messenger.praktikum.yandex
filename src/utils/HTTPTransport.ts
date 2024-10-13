@@ -22,9 +22,16 @@ function queryStringify(data: Document | XMLHttpRequestBodyInit) {
 
 	return arr.length ? `?${arr.join('&')}` : '';
 }
-type HTTPMethod = (url: string, options?: IHTTPTransportOptions) => Promise<XMLHttpRequest | Error>
+
+type HTTPMethod = (url: string, options?: IHTTPTransportOptions) => Promise<string | Error>
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-class HTTPTransport {
+export default class HTTPTransport {
+	protected _baseUrl: string;
+
+	constructor(url: string = ""){
+		this._baseUrl = url;
+	}
+
 	get: HTTPMethod = (url, options = {}) =>
 		this.request(url, { ...options, method: METHODS.GET }, options.timeout);
 
@@ -54,11 +61,12 @@ class HTTPTransport {
 				return;
 			}
 			const xml = new XMLHttpRequest();
+			xml.withCredentials = true;
 			xml.open(
 				options.method,
 				method === METHODS.GET && !!data
-					? `${url}${queryStringify(data)}`
-					: url,
+					? `${this._baseUrl}${url}${queryStringify(data)}`
+					: `${this._baseUrl}${url}`,
 			);
 
 			Object.keys(headers).forEach((key) => {
@@ -66,7 +74,11 @@ class HTTPTransport {
 			});
 
 			xml.onload = function () {
-				resolve(xml);
+				if(xml.status === 200) {
+					resolve(xml.responseText);
+				} else {
+					reject(new Error(xml.statusText))
+				}
 			};
 
 			xml.onerror = reject;
@@ -83,7 +95,7 @@ class HTTPTransport {
 		});
 }
 
-interface IHTTPTransportOptions {
+export interface IHTTPTransportOptions {
 	timeout?: number;
 	headers?: Record<string, string>;
 	data?: Document | XMLHttpRequestBodyInit | null;
