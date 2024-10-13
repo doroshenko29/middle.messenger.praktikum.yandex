@@ -4,6 +4,10 @@ import Store from '../store/store';
 import { IUserInfoDto } from "../types/IUserInfoDto";
 import { INullable } from "../utils/INullable";
 import ChatUsersApi from "../api/chatUsers.api";
+import ChatTokenApi from "../api/chatToken.api";
+import UserInfoController from "./userInfoController";
+import NeedArray from "../utils/needArray";
+import { IMessageProps } from "../component/message";
 
 type ILastMessageDto = {
     user: IUserInfoDto,
@@ -31,6 +35,10 @@ export type ICreateChatDto = {
 }
 
 class ChatsController {
+    public CurrentSocket: WebSocket;
+
+    protected readonly chatTokenApi = new ChatTokenApi();
+
     protected readonly chatsApi = new ChatsApi();
 
     protected readonly chatUsersApi = new ChatUsersApi();
@@ -66,6 +74,66 @@ class ChatsController {
         return false;
     }
 
+    public async SendMessage(message: string): Promise<void> {
+        this.CurrentSocket.send(JSON.stringify({
+            content: message,
+            type: 'message',
+        }));
+    }
+
+    public async ConnectToChat(id: number): Promise<void> {
+        const token = await this.GetChatToken(id);
+        const userId = (await UserInfoController.GetUserInfo(false))?.id;
+        const socket = new WebSocket(`wss://ya-praktikum.tech/ws/chats/${userId}/${id}/${token}`); 
+
+        socket.addEventListener('open', () => {
+            console.log('Соединение установлено');
+            socket.send(JSON.stringify({
+                content: '0',
+                type: 'get old',
+              })); 
+          });
+          
+          socket.addEventListener('close', event => {
+            Store.set('messages', []);
+            if (event.wasClean) {
+              console.log('Соединение закрыто чисто');
+            } else {
+              console.log('Обрыв соединения');
+            }
+          
+            console.log(`Код: ${event.code} | Причина: ${event.reason}`);
+          });
+          
+          socket.addEventListener('message', event => {
+            const { messages = [] } = Store.getState<ReadonlyArray<IMessageProps>>();
+
+            const uniqueMessages = [...new Map([...messages, ...NeedArray(JSON.parse(event.data))].map(item => [item.id, item])).values()];
+
+            Store.set(
+                'messages',
+                uniqueMessages
+                    .filter(({id}) => Boolean(id))
+                    .sort((a, b) => new Date(a.time) < new Date(b.time) ? 1 : -1)
+                    .reverse()
+            );
+          });
+          
+          socket.addEventListener('error', event => {
+            console.log('Ошибка', event);
+          }); 
+
+          this.CurrentSocket = socket;
+    }
+
+    public async GetChatToken(id: number): Promise<string | void> {
+        const [result, error] = await this.chatTokenApi.create<{token: string}>(id);
+        if (!error && result != null) {
+            return result.token;
+        }
+        return alert(error);
+    }
+
     // add params
     public async GetChats(querry: IGetChatsParams = {}, force = true): Promise<INullable<ReadonlyArray<IChatDto>>> {
         if(!force && Store.getState<ReadonlyArray<IChatDto>>()?.chats != null) {
@@ -87,7 +155,15 @@ class ChatsController {
         }
     }
 
+    public IsChatCurrent(id: number | null): boolean {
+        return id === Store.getState<number | null>()?.currentChatId;
+    }
+
     public setCurrentChatId(id: number | null) {
+        if(this.IsChatCurrent(id)) {
+            return;
+        }
+        this.CurrentSocket?.close();
         Store.set('currentChatId', id);
     }
 

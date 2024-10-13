@@ -10,8 +10,11 @@ function isArrayOrObject(value: unknown) {
     return isPlainObject(value) || isArray(value);
 }
 
-export default function isEqual(a: object | string, b: object | string): boolean {
+export default function isEqual(a: object | string | number = {}, b: object | string | number = {}): boolean {
         if(typeof a === "string" && typeof b === "string") {
+            return a === b;
+        }
+		if(typeof a === "number" && typeof b === "number") {
             return a === b;
         }
 		if(Object.keys(a).length !== Object.keys(b).length) {

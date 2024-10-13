@@ -16,6 +16,7 @@ function getChatsBlock(chats?: ReadonlyArray<IChatDto>) {
 	}
 	return chats.map((chat) => new Chat({
 		...chat,
+		isActive: ChatsController.IsChatCurrent(chat.id),
 		onClick: () => {
 			ChatsController.setCurrentChatId(chat.id);
 		},

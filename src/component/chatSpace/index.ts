@@ -1,10 +1,8 @@
 import Block, { IBlockProps } from '../../blocks/block';
 import Button from '../../component/button';
 import FormField from '../../component/formField';
-import Message from '../../component/message';
+import Messages from '../../component/messages';
 import connectToCurrentChat from '../../connectors/connectToCurrentChat';
-import { currentChat } from '../../mocks';
-import LogFormData from '../../utils/logFormData';
 import Template from './chatSpace.hbs?raw';
 import ChatsController from "../../controllers/chatsController";
 import Modal from '../modal';
@@ -85,7 +83,7 @@ class ChatSpace extends Block {
 					}
 				}
 			}),
-			CurrentChat: currentChat.map((el) => new Message(el)),
+			Messages: new Messages(),
 			MessageInputField: new FormField({
 				class: 'message-field-wrapper',
 				name: 'message',
@@ -96,10 +94,11 @@ class ChatSpace extends Block {
 				class: 'button-send',
 			}),
 			events: {
-				submit: (event) => {
+				submit: async (event) => {
 					event.preventDefault();
-					const formData = new FormData(event.target as HTMLFormElement);
-					LogFormData(formData);
+					const {message} = GetObjectFormData<{message: string}>(new FormData(event.target as HTMLFormElement))
+					await ChatsController.SendMessage(message);
+					(this.children.MessageInputField as FormField).clean();
 				},
 			},
 

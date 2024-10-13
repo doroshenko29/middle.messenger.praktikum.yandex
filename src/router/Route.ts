@@ -3,6 +3,7 @@ import isEqual from "../utils/isEqual";
 
 interface IRouteProps {
 	rootQuery: HTMLElement;
+    [key: string]: unknown;
 }
 
 export default class Route {
@@ -10,11 +11,11 @@ export default class Route {
 
     protected _pathname: string;
 
-    protected _blockClass: new () => Block;
+    protected _blockClass: new (_args?: unknown) => Block;
 
     protected _props: IRouteProps;
 
-    constructor(pathname: string, view: new () => Block, props: IRouteProps) {
+    constructor(pathname: string, view: new (_args?: unknown) => Block, props: IRouteProps) {
         this._pathname = pathname;
         this._blockClass = view;
         this._props = props;
@@ -39,7 +40,7 @@ export default class Route {
 
     render() {
         if (!this._block) {
-            this._block = new this._blockClass();
+            this._block = new this._blockClass(this._props);
         }
 
         this._block!.show(this._props.rootQuery);

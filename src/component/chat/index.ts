@@ -17,7 +17,7 @@ export default class Chat extends Block<IChatProps> {
 	}
 	
 	render() {
-		return this.compile(Template, { ...this.props });
+		return this.compile(Template, this.props);
 	}
 }
 
@@ -28,5 +28,6 @@ interface IChatProps extends IBlockProps {
 	time?: string;
 	unreadsCount?: number;
 	myMessage?: boolean;
+	isActive?: boolean;
 	onClick?: (e: Event) => void
 }

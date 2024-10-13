@@ -1,4 +1,5 @@
 import Block from "../blocks/block";
+import ErrorPage from "../pages/error";
 import { INullable } from "../utils/INullable";
 import Route from "./Route";
 
@@ -46,7 +47,7 @@ export default class Router {
         }
         this._currentRoute = route;
         if(route == null) {
-           return;
+          return;
         }
         route.render();
     }
@@ -69,6 +70,10 @@ export default class Router {
     }
 
     getRoute(pathname: string) {
-        return this.routes.find(route => route.match(pathname));
+        return this.routes.find(route => route.match(pathname)) || new Route("error", ErrorPage, {
+          rootQuery: this._rootQuery,
+          errorCode: "404",
+          errorText: 'Страница не найдена',
+        });
     }
 }

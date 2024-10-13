@@ -356,6 +356,10 @@ input {
 		display: flex;
 		border-bottom: 1px solid var(--background-color);
 
+		&.active {
+			background-color: #E4EDFD;
+		}
+
 		&__avatar {
 			width: 47px;
 			height: 47px;

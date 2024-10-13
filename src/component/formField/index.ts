@@ -35,6 +35,12 @@ export default class FormField extends Block<IFormFieldProps> {
 		});
 	}
 
+	clean() {
+		(this.children.Input as Block).setProps({value: ""});
+		this.IsValid = true;
+		this.isTouched = false;
+	}
+
 	validatorCallback = (validator: RegExp, value: string | number) => {
 		if (!value) {
 			return 'Поле не должно быть пустым';
