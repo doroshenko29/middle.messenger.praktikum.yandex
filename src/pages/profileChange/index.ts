@@ -2,7 +2,6 @@ import Block from '../../blocks/block';
 import AvatarChange from '../../component/avatarChange';
 import BackLink from '../../component/backLink';
 import Button from '../../component/button';
-import DevModeNav from '../../component/devModeNav';
 import FormField from '../../component/formField';
 import PROFILE_FIELDS_DTO from '../../constants/ProfileFieldsDto';
 import Template from './profileChange.hbs?raw';
@@ -26,7 +25,6 @@ class ProfileChangePage extends Block {
 				text: 'Сохранить',
 			}),
 			BackLink: new BackLink(),
-			DevModeNav: new DevModeNav(),
 			events: {
 				submit: async (event) => {
 					event.preventDefault();

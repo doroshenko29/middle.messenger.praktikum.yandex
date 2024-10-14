@@ -1,4 +1,5 @@
 import Block, { IBlockProps } from '../../blocks/block';
+import ERROR_TEXT from '../../constants/ERROR_TEXT';
 import VALIDATOR from '../../constants/Validator';
 import Error from '../error';
 import Input from '../input';
@@ -24,7 +25,7 @@ export default class FormField extends Block<IFormFieldProps> {
 				...props,
 				OnBlur: (value) => {
 					this.isTouched = true;
-					const errorText = this.validatorCallback(VALIDATOR[props.name], value);
+					const errorText = this.validatorCallback(VALIDATOR[props.name], value, ERROR_TEXT[props.name]);
 					this.IsValid = errorText == null;
 					(this.children.ErrorMessage as Error).setProps({
 						errorText,
@@ -41,7 +42,7 @@ export default class FormField extends Block<IFormFieldProps> {
 		this.isTouched = false;
 	}
 
-	validatorCallback = (validator: RegExp, value: string | number) => {
+	validatorCallback = (validator: RegExp, value: string | number, textError: string) => {
 		if (!value) {
 			return 'Поле не должно быть пустым';
 		}
@@ -49,7 +50,7 @@ export default class FormField extends Block<IFormFieldProps> {
 		if (isValid) {
 			return null;
 		}
-		return `Поле "${this.props.label}" содержит недопустимые символы`;
+		return `Поле "${this.props.label}" должно содержать ${textError}`;
 	};
 
 	render() {

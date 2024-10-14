@@ -1,6 +1,5 @@
 import Block from '../../blocks/block';
 import Button from '../../component/button';
-import DevModeNav from '../../component/devModeNav';
 import FormField from '../../component/formField';
 import Link from '../../component/link';
 import PAGE from '../../constants/PAGE';
@@ -26,7 +25,6 @@ export default class RegistrationPage extends Block {
 				text: 'Зарегистрироваться',
 			}),
 			Fields: REGISTRATION_FIELDS_DTO.map((field) => new FormField(field)),
-			DevModeNav: new DevModeNav(),
 			events: {
 				submit: async (event) => {
 					event.preventDefault();

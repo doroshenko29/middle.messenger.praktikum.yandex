@@ -1,5 +1,4 @@
 import Block from '../../blocks/block';
-import DevModeNav from '../../component/devModeNav';
 import Template from './chat.hbs?raw';
 import ChatAside from '../../component/chatAside';
 import ChatSpace from '../../component/chatSpace';
@@ -9,7 +8,6 @@ class ChatPage extends Block {
 		super({
 			ChatAside: new ChatAside(),
 			ChatSpace: new ChatSpace(),
-			DevModeNav: new DevModeNav(),
 		});
 	}
 

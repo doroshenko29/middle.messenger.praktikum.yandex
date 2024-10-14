@@ -2,7 +2,6 @@ import Block from '../../blocks/block';
 import AvatarChange from '../../component/avatarChange';
 import BackLink from '../../component/backLink';
 import Button from '../../component/button';
-import DevModeNav from '../../component/devModeNav';
 import FormField from '../../component/formField';
 import PROFILE_PASSWORD_CHANGE_DTO from '../../constants/ProfilePasswordChangeDto';
 import UserInfoController from '../../controllers/userInfoController';
@@ -29,7 +28,6 @@ class ProfilePasswordChangePage extends Block {
 				text: 'Сохранить',
 			}),
 			BackLink: new BackLink(),
-			DevModeNav: new DevModeNav(),
 			events: {
 				submit: async (event) => {
 					event.preventDefault();
