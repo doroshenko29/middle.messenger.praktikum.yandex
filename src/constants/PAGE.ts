@@ -1,10 +1,10 @@
 enum PAGE {
-	LOGIN = 'login',
-	REGISTRATION = 'registration',
-	CHAT = 'chat',
-	PROFILE = 'profile',
-	PROFILE_CHANGE = 'profile-change',
-	PROFILE_CHANGE_PASSWORD = 'profile-password-change',
+	LOGIN = '/',
+	REGISTRATION = '/sign-up',
+	CHAT = '/messenger',
+	PROFILE = '/settings',
+	PROFILE_CHANGE = '/settings/change',
+	PROFILE_CHANGE_PASSWORD = '/settings/change/password',
 	ERROR = 'error-5**',
 	ERROR_NOT_FOUND = 'error-404',
 }
