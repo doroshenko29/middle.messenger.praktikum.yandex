@@ -8,6 +8,7 @@ import ProfileChangePage from './pages/profileChange';
 import ProfilePasswordChangePage from './pages/profilePasswordChange';
 import RegistrationPage from './pages/registration';
 import Router from './router';
+import ErrorPage from './pages/error';
 
 Handlebars.registerPartial('AuthForm', AuthForm);
 export default class App {
@@ -21,6 +22,7 @@ export default class App {
 			.use(PAGE.PROFILE, ProfilePage)
 			.use(PAGE.PROFILE_CHANGE, ProfileChangePage)
 			.use(PAGE.PROFILE_CHANGE_PASSWORD, ProfilePasswordChangePage)
+			.use(PAGE.ERROR, ErrorPage)
 			.start();
 	}
 }
