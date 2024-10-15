@@ -40,6 +40,8 @@ class ChatsController {
 
     protected ping: number;
 
+    protected ping: number;
+
     protected readonly chatTokenApi = new ChatTokenApi();
 
     protected readonly chatsApi = new ChatsApi();
