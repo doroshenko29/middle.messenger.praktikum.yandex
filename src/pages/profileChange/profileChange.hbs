@@ -1,9 +1,11 @@
 <div class='page'>
-  <div class="page-wrapper">
-    {{> BackLink}}
+  <div class="page-wrapper profile-page">
+    {{{BackLink}}}
     <main class="profile">
       <form class="profile__form">
         {{{Avatar}}}
+      </form>
+      <form class="profile__form">
         <section>
           {{#each Fields}}
             {{{this}}}
@@ -13,5 +15,4 @@
       </form>
     </main>
   </div>
-  {{{DevModeNav}}}
 </div>

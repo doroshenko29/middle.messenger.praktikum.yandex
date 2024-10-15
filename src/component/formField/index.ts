@@ -1,30 +1,48 @@
 import Block, { IBlockProps } from '../../blocks/block';
+import ERROR_TEXT from '../../constants/ERROR_TEXT';
 import VALIDATOR from '../../constants/Validator';
-import ErrorBlock from '../error';
-import InputBlock from '../input';
-import LabelBlock from '../label';
+import Error from '../error';
+import Input from '../input';
+import Label from '../label';
 import FormFieldTemplate from './formField.hbs?raw';
 
-export default class FormFieldBlock extends Block {
+export default class FormField extends Block<IFormFieldProps> {
+	protected isTouched = false;
+	
+	public IsValid = true;
+
+	public get IsTouchedAndValid() {
+		return this.isTouched && this.IsValid;
+	}
+
 	constructor(props: IFormFieldProps) {
 		super({
 			...props,
-			Label: new LabelBlock({
+			Label: new Label({
 				...props,
 			}),
-			Input: new InputBlock({
+			Input: new Input({
 				...props,
 				OnBlur: (value) => {
-					(this.children.ErrorMessage as Block).setProps({
-						errorText: this.validatorCallback(VALIDATOR[props.name], value),
+					this.isTouched = true;
+					const errorText = this.validatorCallback(VALIDATOR[props.name], value, ERROR_TEXT[props.name]);
+					this.IsValid = errorText == null;
+					(this.children.ErrorMessage as Error).setProps({
+						errorText,
 					});
 				},
 			}),
-			ErrorMessage: new ErrorBlock({}),
+			ErrorMessage: new Error({}),
 		});
 	}
 
-	validatorCallback = (validator: RegExp, value: string | number) => {
+	clean() {
+		(this.children.Input as Block).setProps({value: ""});
+		this.IsValid = true;
+		this.isTouched = false;
+	}
+
+	validatorCallback = (validator: RegExp, value: string | number, textError: string) => {
 		if (!value) {
 			return 'Поле не должно быть пустым';
 		}
@@ -32,7 +50,7 @@ export default class FormFieldBlock extends Block {
 		if (isValid) {
 			return null;
 		}
-		return `Поле "${this.props.label}" содержит недопустимые символы`;
+		return `Поле "${this.props.label}" должно содержать ${textError}`;
 	};
 
 	render() {
@@ -45,5 +63,6 @@ export interface IFormFieldProps extends IBlockProps {
 	name: string;
 	type: string;
 	value?: string | number;
+	class?: string;
 	validatorCallback?: (value?: string | number) => string | null;
 }
