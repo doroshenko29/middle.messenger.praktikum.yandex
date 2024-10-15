@@ -38,6 +38,8 @@ class ChatsController {
     public CurrentSocket: WebSocket;
     protected ping;
 
+    protected ping: number;
+
     protected readonly chatTokenApi = new ChatTokenApi();
 
     protected readonly chatsApi = new ChatsApi();
