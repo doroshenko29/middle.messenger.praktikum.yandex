@@ -37,6 +37,8 @@ export type ICreateChatDto = {
 class ChatsController {
     public CurrentSocket: WebSocket;
 
+    protected ping: number;
+
     protected readonly chatTokenApi = new ChatTokenApi();
 
     protected readonly chatsApi = new ChatsApi();
@@ -91,7 +93,11 @@ class ChatsController {
             socket.send(JSON.stringify({
                 content: '0',
                 type: 'get old',
-              })); 
+            })); 
+
+            this.ping = setInterval(() => {
+                this.CurrentSocket.send(JSON.stringify({ type: 'ping' }));
+            }, 10000);
           });
           
           socket.addEventListener('close', event => {
@@ -102,6 +108,9 @@ class ChatsController {
               console.log('Обрыв соединения');
             }
           
+            if(this.ping) {
+                clearInterval(this.ping);
+            }
             console.log(`Код: ${event.code} | Причина: ${event.reason}`);
           });
           
@@ -131,7 +140,8 @@ class ChatsController {
         if (!error && result != null) {
             return result.token;
         }
-        return alert(error);
+
+        return console.warn(error);
     }
 
     // add params
@@ -146,13 +156,15 @@ class ChatsController {
         return result;
     }
 
-    public async RemoveChat(chatId?: number) {
+    public async RemoveChat(chatId?: number): Promise<void> {
         const [, error] = await this.chatsApi.delete(JSON.stringify({chatId}));
         if (!error) {
             const chats = Store.getState<ReadonlyArray<IChatDto>>()?.chats;
             Store.set('chats', chats.filter(({id}) => id !== chatId));
             this.setCurrentChatId(null);
+            return;
         }
+        console.warn(error);
     }
 
     public IsChatCurrent(id: number | null): boolean {

@@ -28,18 +28,22 @@ class UserInfoController {
         const [result, error] = await new UpdateUserProfileApi().update<IUserInfoDto>(JSON.stringify(dto));
         if (!error && result != null) {
             Store.set('user', result);
+            return;
         }
+        console.warn(error);
     }
 
     public async UpdateUserPassword(dto: IUserPasswordChangeDto): Promise<IResultError<IUserPasswordChangeDto>> {
         return new UpdateUserPasswordApi().update<IUserPasswordChangeDto>(JSON.stringify(dto));
     }
 
-    public async UpdateProfileAvatar(dto: FormData) {
+    public async UpdateProfileAvatar(dto: FormData): Promise<void> {
         const [result, error] = await new UpdateUserProfileAvatarApi().update(dto);
         if (!error && result != null) {
             Store.set('user', result);
+            return;
         }
+        console.warn(error);
     }
 }
 

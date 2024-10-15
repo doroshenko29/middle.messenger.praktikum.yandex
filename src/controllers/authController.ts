@@ -25,25 +25,31 @@ class AuthController {
 
     protected readonly logoutApi = new LogoutApi();
 
-    public async SignIn(dto: ISignInDto) {
+    public async SignIn(dto: ISignInDto): Promise<void> {
         const [, error] = await this.signInApi.create(JSON.stringify(dto));
         if (!error) {
             new Router().go(PAGE.CHAT);
+            return;
         }
+        console.warn(error);
     }
 
-    public async SignUp(dto: ISignUpDto) {
+    public async SignUp(dto: ISignUpDto): Promise<void> {
         const [result, error] = await this.signUpApi.create<{id: number}>(JSON.stringify(dto));
         if (!error && result.id != null) {
             new Router().go(PAGE.CHAT);
+            return;
         }
+        console.warn(error);
     }
 
-    public async logout() {
+    public async logout(): Promise<void> {
         const [, error] = await this.logoutApi.create();
         if (!error) {
             new Router().go(PAGE.LOGIN);
+            return;
         }
+        console.warn(error);
     }
 }
 
