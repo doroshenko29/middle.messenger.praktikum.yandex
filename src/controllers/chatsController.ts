@@ -117,15 +117,25 @@ class ChatsController {
           socket.addEventListener('message', event => {
             const { messages = [] } = Store.getState<ReadonlyArray<IMessageProps>>();
 
-            const uniqueMessages = [...new Map([...messages, ...NeedArray(JSON.parse(event.data))].map(item => [item.id, item])).values()];
+            try {
+                const data = JSON.parse(event.data);
 
-            Store.set(
-                'messages',
-                uniqueMessages
-                    .filter(({id}) => Boolean(id))
-                    .sort((a, b) => new Date(a.time) < new Date(b.time) ? 1 : -1)
-                    .reverse()
-            );
+                if(data.type === "pong") {
+                    return;
+                }
+
+                const uniqueMessages = [...new Map([...messages, ...NeedArray(JSON.parse(event.data))].map(item => [item.id, item])).values()];
+
+                Store.set(
+                    'messages',
+                    uniqueMessages
+                        .filter(({id}) => Boolean(id))
+                        .sort((a, b) => new Date(a.time) < new Date(b.time) ? 1 : -1)
+                        .reverse()
+                );
+            } catch (e) {
+                console.error(e);
+            }
           });
           
           socket.addEventListener('error', event => {
