@@ -467,9 +467,14 @@ input {
 			flex-grow: 1;
 			display: flex;
 			flex-direction: column;
-			justify-content: flex-end;
 			gap: 10px;
 			margin-bottom: 20px;
+			max-height: calc(100vh - 160px);
+			overflow-y: auto;
+			scrollbar-color: var(--link-text-color) var(--background-color);
+			scrollbar-width: thin;
+			transition: scrollbar-color 0.3s ease-out;
+			padding: 10px;
 
 			.message {
 				display: flex;

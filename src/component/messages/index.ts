@@ -7,7 +7,6 @@ function getMessagesBlock(messages?: IMessagesProps["messages"]) {
 	if (!messages) {
 		return [];
 	}
-	console.log(messages)
 	return messages.map((message) => new Message(message));
 }
 
