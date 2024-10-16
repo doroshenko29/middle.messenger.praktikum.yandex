@@ -36,9 +36,6 @@ export type ICreateChatDto = {
 
 class ChatsController {
     public CurrentSocket: WebSocket;
-    protected ping;
-
-    protected ping: number;
 
     protected ping: number;
 
