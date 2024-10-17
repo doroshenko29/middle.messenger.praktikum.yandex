@@ -7,7 +7,7 @@ import Modal from '../../component/modal';
 import connectToChatAside from '../../connectors/connectToChatAside';
 import PAGE from '../../constants/PAGE';
 import ChatsController, { IChatDto } from '../../controllers/chatsController';
-import GetObjectFormData from '../../utils/getObjectFormData';
+import getObjectFormData from '../../utils/getObjectFormData';
 import Template from './chatAside.hbs?raw';
 
 function getChatsBlock(chats?: ReadonlyArray<IChatDto>) {
@@ -55,7 +55,7 @@ class ChatAside extends Block {
 				}),
 				OnSubmit: async (event) => {
 					const isSuccess = await ChatsController.CreateChat(
-						GetObjectFormData(new FormData(event.target as HTMLFormElement))
+						getObjectFormData(new FormData(event.target as HTMLFormElement))
 					);
 					if(isSuccess) {
 						(this.children.ModalAdd as Modal).hide()

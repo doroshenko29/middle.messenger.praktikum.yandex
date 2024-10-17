@@ -3,7 +3,7 @@ import Block, { IBlockProps } from '../blocks/block';
 import UserInfoController from '../controllers/userInfoController';
 import Store, { StoreEvents } from '../store/store';
 import { IUserInfoDto } from '../types/IUserInfoDto';
-import NeedArray from '../utils/needArray';
+import needArray from '../utils/needArray';
 
 export default function connectToUser(Component: new () => Block){
 	return class extends Component {
@@ -35,7 +35,7 @@ export default function connectToUser(Component: new () => Block){
 				super.updateFields(info);
 			} catch (e) {
 				for(const [key, value] of Object.entries(info)) {
-					const field = NeedArray(this.children.Fields).find((el) => el.props.name === key)
+					const field = needArray(this.children.Fields).find((el) => el.props.name === key)
 					if(field) {
 						(field!.children.Input as Block).setProps({value})
 					}			

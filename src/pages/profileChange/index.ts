@@ -6,13 +6,13 @@ import FormField from '../../component/formField';
 import PROFILE_FIELDS_DTO from '../../constants/ProfileFieldsDto';
 import Template from './profileChange.hbs?raw';
 import UserInfoController from '../../controllers/userInfoController';
-import NeedArray from '../../utils/needArray';
-import GetObjectFormData from '../../utils/getObjectFormData';
+import needArray from '../../utils/needArray';
+import getObjectFormData from '../../utils/getObjectFormData';
 import connectToUser from '../../connectors/connectToUser';
 
 class ProfileChangePage extends Block {
 	protected get isFormValid() {
-		return NeedArray(this.children.Fields as FormField[]).every(field => field.IsValid)
+		return needArray(this.children.Fields as FormField[]).every(field => field.IsValid)
 	}
 
 	constructor() {
@@ -31,7 +31,7 @@ class ProfileChangePage extends Block {
 					if(!this.isFormValid) {
 						return;
 					}
-					await UserInfoController.UpdateUserInfo(GetObjectFormData(new FormData(event.target as HTMLFormElement)));
+					await UserInfoController.UpdateUserInfo(getObjectFormData(new FormData(event.target as HTMLFormElement)));
 				},
 			},
 		});

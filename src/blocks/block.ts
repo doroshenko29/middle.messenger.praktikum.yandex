@@ -1,7 +1,7 @@
 import Handlebars from 'handlebars';
 import { v4 as makeUUID } from 'uuid';
 import EventBus from '../utils/eventBus';
-import NeedArray from '../utils/needArray';
+import needArray from '../utils/needArray';
 
 interface IChildren {
 	[key: string]: Block | Array<Block>;
@@ -106,7 +106,7 @@ abstract class Block<Props extends IBlockProps = Record<string, unknown>> {
 		this.eventBus().emit(Block.EVENTS.FLOW_CDM);
 
 		Object.values(this.children).forEach((child) => {
-			NeedArray(child).forEach((_child) => {
+			needArray(child).forEach((_child) => {
 				_child.dispatchComponentDidMount();
 			});
 		});

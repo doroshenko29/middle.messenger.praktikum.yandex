@@ -6,14 +6,14 @@ import FormField from '../../component/formField';
 import PROFILE_PASSWORD_CHANGE_DTO from '../../constants/ProfilePasswordChangeDto';
 import UserInfoController from '../../controllers/userInfoController';
 import { IUserInfoDto } from '../../types/IUserInfoDto';
-import GetObjectFormData from '../../utils/getObjectFormData';
-import NeedArray from '../../utils/needArray';
+import getObjectFormData from '../../utils/getObjectFormData';
+import needArray from '../../utils/needArray';
 import Template from './profilePasswordChange.hbs?raw';
 import connectToUser from '../../connectors/connectToUser';
 
 class ProfilePasswordChangePage extends Block {
 	protected get isFormValid() {
-		return NeedArray(this.children.Fields as FormField[]).every(field => field.IsTouchedAndValid)
+		return needArray(this.children.Fields as FormField[]).every(field => field.IsTouchedAndValid)
 	}
 	
 	constructor() {
@@ -34,7 +34,7 @@ class ProfilePasswordChangePage extends Block {
 					if(!this.isFormValid) {
 						return;
 					}
-					await UserInfoController.UpdateUserPassword(GetObjectFormData(new FormData(event.target as HTMLFormElement)));
+					await UserInfoController.UpdateUserPassword(getObjectFormData(new FormData(event.target as HTMLFormElement)));
 				},
 			},
 		});

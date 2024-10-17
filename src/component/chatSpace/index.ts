@@ -6,8 +6,8 @@ import connectToCurrentChat from '../../connectors/connectToCurrentChat';
 import Template from './chatSpace.hbs?raw';
 import ChatsController from "../../controllers/chatsController";
 import Modal from '../modal';
-import GetObjectFormData from '../../utils/getObjectFormData';
-import NeedArray from '../../utils/needArray';
+import getObjectFormData from '../../utils/getObjectFormData';
+import needArray from '../../utils/needArray';
 
 class ChatSpace extends Block {
 	constructor(props: IChatSpaceProps = {}) {
@@ -46,7 +46,7 @@ class ChatSpace extends Block {
 				}),
 				OnSubmit: async (event) => {
 					const isSuccess = await ChatsController.AddUserToChat(
-						NeedArray(GetObjectFormData<{user_id: number[]}>(new FormData(event.target as HTMLFormElement)).user_id),
+						needArray(getObjectFormData<{user_id: number[]}>(new FormData(event.target as HTMLFormElement)).user_id),
 					);
 					if(isSuccess) {
 						(this.children.ModalAddUser as Modal).hide()
@@ -76,7 +76,7 @@ class ChatSpace extends Block {
 				}),
 				OnSubmit: async (event) => {
 					const isSuccess = await ChatsController.RemoveUserFromChat(
-						NeedArray(GetObjectFormData<{user_id: number[]}>(new FormData(event.target as HTMLFormElement)).user_id),
+						needArray(getObjectFormData<{user_id: number[]}>(new FormData(event.target as HTMLFormElement)).user_id),
 					);
 					if(isSuccess) {
 						(this.children.ModalRemoveUser as Modal).hide()
@@ -96,7 +96,7 @@ class ChatSpace extends Block {
 			events: {
 				submit: async (event) => {
 					event.preventDefault();
-					const {message} = GetObjectFormData<{message: string}>(new FormData(event.target as HTMLFormElement))
+					const {message} = getObjectFormData<{message: string}>(new FormData(event.target as HTMLFormElement))
 					await ChatsController.SendMessage(message);
 					(this.children.MessageInputField as FormField).clean();
 				},

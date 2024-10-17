@@ -5,14 +5,14 @@ import Link from '../../component/link';
 import PAGE from '../../constants/PAGE';
 import REGISTRATION_FIELDS_DTO from '../../constants/RegistrationFieldsDto';
 import AuthController from '../../controllers/authController';
-import GetObjectFormData from '../../utils/getObjectFormData';
-import NeedArray from '../../utils/needArray';
+import getObjectFormData from '../../utils/getObjectFormData';
+import needArray from '../../utils/needArray';
 import Template from './registration.hbs?raw';
 
 export default class RegistrationPage extends Block {
 
 	protected get isFormValid() {
-		return NeedArray(this.children.Fields as FormField[]).every(field => field.IsTouchedAndValid)
+		return needArray(this.children.Fields as FormField[]).every(field => field.IsTouchedAndValid)
 	}
 
 	constructor() {
@@ -31,7 +31,7 @@ export default class RegistrationPage extends Block {
 					if(!this.isFormValid) {
 						return;
 					}
-					await AuthController.SignUp(GetObjectFormData(new FormData(event.target as HTMLFormElement)));
+					await AuthController.SignUp(getObjectFormData(new FormData(event.target as HTMLFormElement)));
 				},
 			},
 		});
