@@ -1,28 +1,37 @@
 import Block from '../../blocks/block';
-import AvatarChangeBlock from '../../component/avatarChange';
-import ButtonBlock from '../../component/button';
-import DevModeNav from '../../component/devModeNav';
-import FormFieldBlock from '../../component/formField';
+import AvatarChange from '../../component/avatarChange';
+import BackLink from '../../component/backLink';
+import Button from '../../component/button';
+import FormField from '../../component/formField';
 import PROFILE_FIELDS_DTO from '../../constants/ProfileFieldsDto';
-import LogFormData from '../../utils/logFormData';
 import Template from './profileChange.hbs?raw';
+import UserInfoController from '../../controllers/userInfoController';
+import needArray from '../../utils/needArray';
+import getObjectFormData from '../../utils/getObjectFormData';
+import connectToUser from '../../connectors/connectToUser';
 
-export default class ProfileChangePage extends Block {
+class ProfileChangePage extends Block {
+	protected get isFormValid() {
+		return needArray(this.children.Fields as FormField[]).every(field => field.IsValid)
+	}
+
 	constructor() {
 		super({
-			Fields: PROFILE_FIELDS_DTO.map((field) => new FormFieldBlock(field)),
-			Avatar: new AvatarChangeBlock({
+			Fields: PROFILE_FIELDS_DTO.map((field) => new FormField(field)),
+			Avatar: new AvatarChange({
 				value: '',
 			}),
-			Button: new ButtonBlock({
+			Button: new Button({
 				text: 'Сохранить',
 			}),
-			DevModeNav: new DevModeNav(),
+			BackLink: new BackLink(),
 			events: {
-				submit: (event) => {
+				submit: async (event) => {
 					event.preventDefault();
-					const formData = new FormData(event.target as HTMLFormElement);
-					LogFormData(formData);
+					if(!this.isFormValid) {
+						return;
+					}
+					await UserInfoController.UpdateUserInfo(getObjectFormData(new FormData(event.target as HTMLFormElement)));
 				},
 			},
 		});
@@ -32,3 +41,5 @@ export default class ProfileChangePage extends Block {
 		return this.compile(Template, this.props);
 	}
 }
+
+export default connectToUser(ProfileChangePage);

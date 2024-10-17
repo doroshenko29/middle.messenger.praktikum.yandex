@@ -22,18 +22,26 @@ function queryStringify(data: Document | XMLHttpRequestBodyInit) {
 
 	return arr.length ? `?${arr.join('&')}` : '';
 }
+
+type HTTPMethod = (url: string, options?: IHTTPTransportOptions) => Promise<string | Error>
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-class HTTPTransport {
-	get = (url: string, options: IHTTPTransportOptions = {}) =>
+export default class HTTPTransport {
+	protected _baseUrl: string;
+
+	constructor(url: string = ""){
+		this._baseUrl = url;
+	}
+
+	get: HTTPMethod = (url, options = {}) =>
 		this.request(url, { ...options, method: METHODS.GET }, options.timeout);
 
-	put = (url: string, options: IHTTPTransportOptions = {}) =>
+	put: HTTPMethod = (url, options = {}) =>
 		this.request(url, { ...options, method: METHODS.PUT }, options.timeout);
 
-	post = (url: string, options: IHTTPTransportOptions = {}) =>
+	post: HTTPMethod = (url, options = {}) =>
 		this.request(url, { ...options, method: METHODS.POST }, options.timeout);
 
-	delete = (url: string, options: IHTTPTransportOptions = {}) =>
+	delete: HTTPMethod = (url, options = {}) =>
 		this.request(url, { ...options, method: METHODS.DELETE }, options.timeout);
 
 	// PUT, POST, DELETE
@@ -45,7 +53,7 @@ class HTTPTransport {
 		url: string,
 		options: IHTTPTransportOptions & { method: keyof typeof METHODS },
 		timeout = 5000,
-	) =>
+	): ReturnType<HTTPMethod> =>
 		new Promise((resolve, reject) => {
 			const { headers = {}, method, data } = options;
 			if (!method) {
@@ -53,11 +61,12 @@ class HTTPTransport {
 				return;
 			}
 			const xml = new XMLHttpRequest();
+			xml.withCredentials = true;
 			xml.open(
 				options.method,
 				method === METHODS.GET && !!data
-					? `${url}${queryStringify(data)}`
-					: url,
+					? `${this._baseUrl}${url}${queryStringify(data)}`
+					: `${this._baseUrl}${url}`,
 			);
 
 			Object.keys(headers).forEach((key) => {
@@ -65,7 +74,15 @@ class HTTPTransport {
 			});
 
 			xml.onload = function () {
-				resolve(xml);
+				if(xml.status === 200) {
+					resolve(xml.responseText);
+				} else {
+					try {
+						reject(new Error(xml.responseText));
+					} catch (_) {
+						reject(new Error(xml.responseText));
+					}
+				}
 			};
 
 			xml.onerror = reject;
@@ -82,7 +99,7 @@ class HTTPTransport {
 		});
 }
 
-interface IHTTPTransportOptions {
+export interface IHTTPTransportOptions {
 	timeout?: number;
 	headers?: Record<string, string>;
 	data?: Document | XMLHttpRequestBodyInit | null;
