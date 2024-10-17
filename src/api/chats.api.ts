@@ -1,30 +1,35 @@
 import HOST from "../constants/HOST";
 import HTTPTransport from "../utils/HTTPTransport";
-import ResultError, { IResultError } from "../utils/resultError";
 import BaseAPI from "./base.api";
 
 const chatsAPIInstance = new HTTPTransport(`${HOST}/api/v2/chats`)
 
 export default class ChatsApi extends BaseAPI {
-    create<IResponseDto>(data: string): Promise<IResultError<IResponseDto>> {
+    create(data: string): Promise<string | Error> {
         return chatsAPIInstance.post('', {
             headers: {
                 'content-type': 'application/json',
             },
             data,
-        }).then((responce) => ResultError(responce))
+        })
+            .then((responce) => responce)
+            .catch((error) => error);
     }
 
-    request<IResponseDto>(querry?: string): Promise<IResultError<IResponseDto>> {
-        return chatsAPIInstance.get(querry? `?${querry}` : "").then((responce) => ResultError(responce))
+    request(querry?: string): Promise<string | Error> {
+        return chatsAPIInstance.get(querry? `?${querry}` : "")
+            .then((responce) => responce)
+            .catch((error) => error);
     }
 
-    delete<IResponseDto>(data: string): Promise<IResultError<IResponseDto>> {
+    delete(data: string): Promise<string | Error> {
         return chatsAPIInstance.delete('', {
             headers: {
                 'content-type': 'application/json',
             },
             data,
-        }).then((responce) => ResultError(responce))
+        })
+            .then((responce) => responce)
+            .catch((error) => error);
     }
 }

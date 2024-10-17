@@ -6,8 +6,9 @@ import { INullable } from "../utils/INullable";
 import ChatUsersApi from "../api/chatUsers.api";
 import ChatTokenApi from "../api/chatToken.api";
 import UserInfoController from "./userInfoController";
-import NeedArray from "../utils/needArray";
+import needArray from "../utils/needArray";
 import { IMessageProps } from "../component/message";
+import resultError from "../utils/resultError";
 
 type ILastMessageDto = {
     user: IUserInfoDto,
@@ -46,10 +47,10 @@ class ChatsController {
     protected readonly chatUsersApi = new ChatUsersApi();
 
     public async AddUserToChat(users: number[]): Promise<boolean> {
-        const [, error] = await this.chatUsersApi.update(JSON.stringify({
+        const [, error] = resultError(await this.chatUsersApi.update(JSON.stringify({
             users,
             chatId: this.getCurrentChatId(),
-        }));
+        })));
         if (!error) {
             return true;
         }
@@ -57,10 +58,10 @@ class ChatsController {
     }
 
     public async RemoveUserFromChat(users: number[]): Promise<boolean> {
-        const [, error] = await this.chatUsersApi.delete(JSON.stringify({
+        const [, error] = resultError(await this.chatUsersApi.delete(JSON.stringify({
             users,
             chatId: this.getCurrentChatId(),
-        }));
+        })));
         if (!error) {
             return true;
         }
@@ -68,7 +69,7 @@ class ChatsController {
     }
 
     public async CreateChat(dto: ICreateChatDto): Promise<boolean> {
-        const [, error] = await this.chatsApi.create(JSON.stringify(dto));
+        const [, error] = resultError(await this.chatsApi.create(JSON.stringify(dto)));
         if (!error) {
             this.GetChats({}, true);
             return true;
@@ -124,7 +125,7 @@ class ChatsController {
                     return;
                 }
 
-                const uniqueMessages = [...new Map([...messages, ...NeedArray(JSON.parse(event.data))].map(item => [item.id, item])).values()];
+                const uniqueMessages = [...new Map([...messages, ...needArray(JSON.parse(event.data))].map(item => [item.id, item])).values()];
 
                 Store.set(
                     'messages',
@@ -146,7 +147,7 @@ class ChatsController {
     }
 
     public async GetChatToken(id: number): Promise<string | void> {
-        const [result, error] = await this.chatTokenApi.create<{token: string}>(id);
+        const [result, error] = resultError<{token: string}>(await this.chatTokenApi.create(id));
         if (!error && result != null) {
             return result.token;
         }
@@ -159,7 +160,7 @@ class ChatsController {
         if(!force && Store.getState<ReadonlyArray<IChatDto>>()?.chats != null) {
             return Store.getState<ReadonlyArray<IChatDto>>()?.chats
         }
-        const [result, error] = await this.chatsApi.request<ReadonlyArray<IChatDto>>(queryString(querry));
+        const [result, error] = resultError<ReadonlyArray<IChatDto>>(await this.chatsApi.request(queryString(querry)));
         if (!error && result != null) {
             Store.set('chats', result);
         }
@@ -167,7 +168,7 @@ class ChatsController {
     }
 
     public async RemoveChat(chatId?: number): Promise<void> {
-        const [, error] = await this.chatsApi.delete(JSON.stringify({chatId}));
+        const [, error] = resultError(await this.chatsApi.delete(JSON.stringify({chatId})));
         if (!error) {
             const chats = Store.getState<ReadonlyArray<IChatDto>>()?.chats;
             Store.set('chats', chats.filter(({id}) => id !== chatId));

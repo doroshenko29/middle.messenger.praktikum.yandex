@@ -5,13 +5,13 @@ import Link from '../../component/link';
 import LOGIN_FIELDS_DTO from '../../constants/LoginFieldsDto';
 import PAGE from '../../constants/PAGE';
 import AuthController from '../../controllers/authController';
-import GetObjectFormData from '../../utils/getObjectFormData';
-import NeedArray from '../../utils/needArray';
+import getObjectFormData from '../../utils/getObjectFormData';
+import needArray from '../../utils/needArray';
 import Template from './login.hbs?raw';
 
 export default class LoginPage extends Block {
 	protected get isFormValid() {
-		return NeedArray(this.children.Fields as FormField[]).every(field => field.IsTouchedAndValid)
+		return needArray(this.children.Fields as FormField[]).every(field => field.IsTouchedAndValid)
 	}
 	
 	constructor() {
@@ -30,7 +30,7 @@ export default class LoginPage extends Block {
 					if(!this.isFormValid) {
 						return;
 					}
-					await AuthController.SignIn(GetObjectFormData(new FormData(event.target as HTMLFormElement)));
+					await AuthController.SignIn(getObjectFormData(new FormData(event.target as HTMLFormElement)));
 				},
 			},
 		});

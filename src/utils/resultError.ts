@@ -1,13 +1,13 @@
-export type IResultError<IResponseDto> = [IResponseDto, null] | [null, Error];
+export type IResultError<IResponseDto> = [IResponseDto, null] | [null, {reason?: string}];
 
-export default function ResultError<IResponseDto>(responce: string | Error): IResultError<IResponseDto> {
-    if(responce instanceof Error) {
-        return [null, responce];
-    } 
-
+export default function resultError<IResponseDto>(responce: string | Error): IResultError<IResponseDto> {
     try {
-        return [JSON.parse(responce), null];
+        if(responce instanceof Error) {
+            return [null, JSON.parse(responce.message)];
+        } 
+
+        return [JSON.parse(responce as string), null];
     } catch (e) {
-        return [responce as IResponseDto, null];
+        return [responce as IResponseDto, e];
     }
 }

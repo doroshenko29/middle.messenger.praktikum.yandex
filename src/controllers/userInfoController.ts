@@ -5,7 +5,7 @@ import UpdateUserProfileAvatarApi from "../api/updateUserProfileAvatar.api";
 import Store from '../store/store';
 import { IUserInfoDto } from "../types/IUserInfoDto";
 import { INullable } from "../utils/INullable";
-import { IResultError } from "../utils/resultError";
+import resultError, { IResultError } from "../utils/resultError";
 
 export type IUserPasswordChangeDto = {
     oldPassword: string;
@@ -17,7 +17,7 @@ class UserInfoController {
         if(!force && Store.getState<IUserInfoDto>()?.user != null) {
             return Store.getState<IUserInfoDto>()?.user
         }
-        const [result, error] = await new GetUserInfoApi().request<IUserInfoDto>();
+        const [result, error] = resultError<IUserInfoDto>(await new GetUserInfoApi().request());
         if (!error && result != null) {
             Store.set('user', result);
         }
@@ -25,7 +25,7 @@ class UserInfoController {
     }
 
     public async UpdateUserInfo(dto: IUserInfoDto): Promise<void> {
-        const [result, error] = await new UpdateUserProfileApi().update<IUserInfoDto>(JSON.stringify(dto));
+        const [result, error] = resultError<IUserInfoDto>(await new UpdateUserProfileApi().update(JSON.stringify(dto)));
         if (!error && result != null) {
             Store.set('user', result);
             return;
@@ -34,11 +34,11 @@ class UserInfoController {
     }
 
     public async UpdateUserPassword(dto: IUserPasswordChangeDto): Promise<IResultError<IUserPasswordChangeDto>> {
-        return new UpdateUserPasswordApi().update<IUserPasswordChangeDto>(JSON.stringify(dto));
+        return resultError<IUserPasswordChangeDto>(await new UpdateUserPasswordApi().update(JSON.stringify(dto)));
     }
 
     public async UpdateProfileAvatar(dto: FormData): Promise<void> {
-        const [result, error] = await new UpdateUserProfileAvatarApi().update(dto);
+        const [result, error] = resultError(await new UpdateUserProfileAvatarApi().update(dto));
         if (!error && result != null) {
             Store.set('user', result);
             return;

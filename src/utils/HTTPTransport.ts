@@ -77,7 +77,11 @@ export default class HTTPTransport {
 				if(xml.status === 200) {
 					resolve(xml.responseText);
 				} else {
-					reject(new Error(xml.statusText))
+					try {
+						reject(new Error(xml.responseText));
+					} catch (_) {
+						reject(new Error(xml.responseText));
+					}
 				}
 			};
 
