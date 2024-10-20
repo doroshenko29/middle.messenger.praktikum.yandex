@@ -10,7 +10,7 @@
 		"noUnusedLocals": true,
 		"noUnusedParameters": true,
 		"lib": ["dom", "es2017"],
-		"types": ["vite/client"],
+		"types": ["vite/client", "mocha"],
 		"noEmit": true,
 		"skipLibCheck": true,
 		"esModuleInterop": true
