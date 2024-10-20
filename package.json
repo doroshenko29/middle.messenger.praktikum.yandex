@@ -23,14 +23,18 @@
 		"stylelint:fix": "npx stylelint **/*.scss --fix",
 		"ts-check": "tsc --noEmit",
 		"check-code-quality": "npm run prettier && npm run lint && npm run stylelint && npm run ts-check",
-		"format": "npm run prettier:fix && npm run lint:fix && npm run stylelint:fix"
+		"format": "npm run prettier:fix && npm run lint:fix && npm run stylelint:fix",
+		"test": "mocha"
 	},
 	"devDependencies": {
+		"@types/chai": "4.3.11",
 		"@types/handlebars": "^4.1.0",
 		"@types/hbs": "^4.0.4",
+		"@types/mocha": "^10.0.9",
 		"@types/uuid": "^10.0.0",
 		"@typescript-eslint/eslint-plugin": "6.13.1",
 		"@typescript-eslint/parser": "6.13.1",
+		"chai": "4.5.0",
 		"eslint": "8.54.0",
 		"eslint-config-airbnb-base": "15.0.0",
 		"eslint-config-node": "^4.1.0",
@@ -39,10 +43,12 @@
 		"eslint-plugin-node": "^11.1.0",
 		"eslint-plugin-prettier": "^5.2.1",
 		"handlebars-loader": "^1.7.3",
+		"mocha": "^10.7.3",
 		"prettier": "^3.3.3",
 		"sass-embedded": "1.78.0",
 		"stylelint": "^16.9.0",
 		"stylelint-config-standard-scss": "^13.1.0",
+		"ts-node": "10.9.2",
 		"typescript": "5.5.4",
 		"vite": "5.4.1"
 	},
