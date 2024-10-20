@@ -1,0 +1,4 @@
+npm run check:lint
+npm run check:stylelint
+npm run check:ts
+npm test
