@@ -1,7 +1,7 @@
 import Block, { IBlockProps } from '../../blocks/block';
 import Template from './input.hbs?raw';
 
-class InputBlock extends Block {
+export default class Input extends Block {
 	constructor(props: IInputProps) {
 		super({
 			...props,
@@ -23,7 +23,8 @@ class InputBlock extends Block {
 }
 
 export interface IInputProps extends IBlockProps {
+	name: string;
+	type: string;
+	value?: string | number;
 	OnBlur?: (value: string | number) => void;
 }
-
-export default InputBlock;

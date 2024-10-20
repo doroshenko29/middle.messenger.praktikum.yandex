@@ -1,8 +1,13 @@
-import Block from '../../blocks/block';
-import ButtonTemplate from './button.hbs?raw';
+import Block, { IBlockProps } from '../../blocks/block';
+import Template from './button.hbs?raw';
 
-export default class ButtonBlock extends Block {
+export default class Button extends Block<IButtonProps> {
 	render() {
-		return this.compile(ButtonTemplate, this.props);
+		return this.compile(Template, this.props);
 	}
+}
+
+interface IButtonProps extends IBlockProps {
+	text: string;
+	class?: string;
 }
