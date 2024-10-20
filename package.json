@@ -50,10 +50,10 @@
 		"stylelint-config-standard-scss": "^13.1.0",
 		"ts-node": "10.9.2",
 		"typescript": "5.5.4",
-		"vite": "5.4.1"
+		"vite": "^5.4.9"
 	},
 	"dependencies": {
-		"express": "4.19.2",
+		"express": "^4.21.1",
 		"handlebars": "4.7.7",
 		"uuid": "^10.0.0"
 	}
