@@ -10,7 +10,7 @@ const METHODS: Record<string, string> = {
  * На входе: объект. Пример: {a: 1, b: 2, c: {d: 123}, k: [1, 2, 3]}
  * На выходе: строка. Пример: ?a=1&b=2&c=[object Object]&k=1,2,3
  */
-function queryStringify(data: Document | XMLHttpRequestBodyInit) {
+function queryStringify(data: Record<string, string>) {
 	if (typeof data !== 'object') {
 		throw new Error('Data must be object');
 	}
@@ -65,7 +65,7 @@ export default class HTTPTransport {
 			xml.open(
 				options.method,
 				method === METHODS.GET && !!data
-					? `${this._baseUrl}${url}${queryStringify(data)}`
+					? `${this._baseUrl}${url}${queryStringify(data as Record<string, string>)}`
 					: `${this._baseUrl}${url}`,
 			);
 
@@ -94,7 +94,7 @@ export default class HTTPTransport {
 			if (options.method === METHODS.GET || !data) {
 				xml.send();
 			} else {
-				xml.send(options.data);
+				xml.send(options.data as Document);
 			}
 		});
 }
@@ -102,5 +102,5 @@ export default class HTTPTransport {
 export interface IHTTPTransportOptions {
 	timeout?: number;
 	headers?: Record<string, string>;
-	data?: Document | XMLHttpRequestBodyInit | null;
+	data?: Record<string, string> | Document | XMLHttpRequestBodyInit | null;
 }
