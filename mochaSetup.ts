@@ -9,5 +9,6 @@ const xhr = sinon.useFakeXMLHttpRequest();
 
 (global.window as unknown as DOMWindow) = jsdom.window;
 global.document = jsdom.window.document;
+global.history = jsdom.window.history;
 global.FormData = jsdom.window.FormData;
 (global.XMLHttpRequest as unknown as SinonFakeXMLHttpRequestStatic) = xhr;
