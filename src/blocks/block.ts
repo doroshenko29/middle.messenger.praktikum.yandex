@@ -2,6 +2,7 @@ import Handlebars from 'handlebars';
 import { v4 as makeUUID } from 'uuid';
 import EventBus from '../utils/eventBus';
 import needArray from '../utils/needArray';
+import isEqual from '../utils/isEqual';
 
 interface IChildren {
 	[key: string]: Block | Array<Block>;
@@ -119,7 +120,7 @@ abstract class Block<Props extends IBlockProps = Record<string, unknown>> {
 	}
 
 	protected componentDidUpdate(oldProps: IBlockProps, newProps: IBlockProps) {
-		return oldProps !== newProps;
+		return !isEqual(oldProps, newProps);
 	}
 
 	setProps = (nextProps: Props) => {
@@ -164,9 +165,12 @@ abstract class Block<Props extends IBlockProps = Record<string, unknown>> {
 				const value = target[prop as keyof Props];
 				return typeof value === 'function' ? value.bind(target) : value;
 			},
-			set: (target, prop, value) => {
-				Object.assign(target, { [prop]: value });
-				this.eventBus().emit(Block.EVENTS.FLOW_CDU, { ...target }, target);
+			set: (target: Props, prop: string, value) => {
+				const oldTarget = { ...target };
+
+        		target[prop as keyof Props] = value;
+
+        		this.eventBus().emit(Block.EVENTS.FLOW_CDU, oldTarget, target);
 				return true;
 			},
 			deleteProperty: () => {

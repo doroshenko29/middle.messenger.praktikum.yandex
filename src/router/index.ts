@@ -1,9 +1,10 @@
 import Block from "../blocks/block";
-import ErrorPage from "../pages/error";
 import { INullable } from "../utils/INullable";
 import Route from "./Route";
 
 export default class Router {
+    protected errorBlock: new () => Block;
+
     protected routes: Array<Route>;
 
     protected history: History;
@@ -31,6 +32,11 @@ export default class Router {
         const route = new Route(pathname, block, {rootQuery: this._rootQuery});
         this.routes.push(route);
         return this;
+    }
+
+    useError(block: new (_args?: unknown) => Block) {
+      this.errorBlock = block;
+      return this;
     }
 
     start() {
@@ -70,7 +76,7 @@ export default class Router {
     }
 
     getRoute(pathname: string) {
-        return this.routes.find(route => route.match(pathname)) || new Route("error", ErrorPage, {
+        return this.routes.find(route => route.match(pathname)) || new Route("error", this.errorBlock, {
           rootQuery: this._rootQuery,
           errorCode: "404",
           errorText: 'Страница не найдена',

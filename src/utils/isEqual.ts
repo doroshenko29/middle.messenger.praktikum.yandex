@@ -11,26 +11,28 @@ function isArrayOrObject(value: unknown) {
 }
 
 export default function isEqual(a: object | string | number = {}, b: object | string | number = {}): boolean {
-        if(typeof a === "string" && typeof b === "string") {
-            return a === b;
+    if(a == null || b == null) {
+        return a === b;
+    }
+    if(typeof a === "string" && typeof b === "string") {
+        return a === b;
+    }
+	if(typeof a === "number" && typeof b === "number") {
+        return a === b;
+    }
+	if(Object.keys(a).length !== Object.keys(b).length) {
+		return false;
+	}
+	for(const [key, value] of Object.entries(a)) {
+		const rhs = b[key as keyof typeof b];
+		if (isArrayOrObject(value) && isArrayOrObject(rhs)) {
+            if (!isEqual(value as object, rhs)) {
+                return false;
+            }      
         }
-		if(typeof a === "number" && typeof b === "number") {
-            return a === b;
-        }
-		if(Object.keys(a).length !== Object.keys(b).length) {
+		if(value !== rhs) {
 			return false;
 		}
-		for(const [key, value] of Object.entries(a)) {
-			const rhs = b[key as keyof typeof b];
-			if (isArrayOrObject(value) && isArrayOrObject(rhs)) {
-                if (!isEqual(value as object, rhs)) {
-                    return false;
-                }
-          
-            }
-			if(value !== rhs) {
-				return false;
-			}
-		}
-		return true;
+	}
+	return true;
 }
