@@ -57,7 +57,8 @@
 		"stylelint-config-standard-scss": "^13.1.0",
 		"ts-node": "10.9.2",
 		"typescript": "5.5.4",
-		"vite": "^5.4.9"
+		"vite": "^5.4.9",
+		"vite-plugin-checker": "^0.8.0"
 	},
 	"dependencies": {
 		"express": "^4.21.1",
